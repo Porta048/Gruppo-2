@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  /* Imposta l'immagine di sfondo, la centra e la fissa durante lo scroll */
+
+  background: url('../image/bg.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  /* Assicura che il body copra tutta l'altezza della finestra */
+  min-height: 100vh;
+  margin: 0;
+
+  /* Imposta i font di base e il colore del testo */
+  font-family: 'Inter', Arial, sans-serif;
+  color: white;
+  text-align: start;
+}
+
+/* Fa in modo che il main occupi lo spazio rimanente */
+main {
+  margin: 3rem 0rem 2rem 10rem;
+  width: 100%;
+  font-size: 1.5em;
+}
+#logo {
+  /* Posiziona il logo in alto a sinistra */
+  margin-top: 3rem;
+  margin-left: 10rem;
+}
+
+#logo img {
+  height: 3rem;
+}
+
+/* Posiziona l'H1/span/p/ul ed li con l'utilizzo del margin */
+header h1 {
+  font-size: 5em;
+  margin: 6rem 76rem 2rem 10rem;
+}
+header span {
+  font-weight: bold;
+}
+main h2 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #c2128d;
+  margin: 0 0 1rem 0;
+}
+main p {
+  margin: 0 67rem 1rem 0;
+}
+form ul {
+  margin: 3rem 0 6rem 2rem;
+}
+li {
+  margin: 0.8rem 0 0 0;
+}
+ul span {
+  font-weight: bold;
+}
+form input {
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+#checkbox {
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+/* Posizione bottone a sinistra in basso, usando il margin, e successivamente creazione del background con effetto "glow" */
+button {
+  margin: 0 0 0 30rem;
+  width: 15rem;
+  height: 4rem;
+  font-weight: bold;
+  font-size: 1em;
+  background-color: #00ffff;
+  border: none;
+  box-shadow: 0 0 15px 5px #00ffff, 0 0 30px 10px #00ffff;
+  color: #000000;
+  cursor: pointer;
+}

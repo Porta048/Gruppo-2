@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style-welcome.css" />
   </head>
   <body>
     <header>
-      <div>
-        <!--Space for Epicode Logo -->
+      <div id="logo">
+        <img src="../assets/image/epicode_logo.png" alt="logo-epicode" />
       </div>
       <h1>Welcome to <span>your exam</span></h1>
     </header>
@@ -16,7 +18,7 @@
       <h2>Instructions</h2>
       <p>
         We don't expect most engineers to know the answers to all of these
-        quiestions , so don't worry if you're unsure of a few of them .
+        questions, so don't worry if you're unsure of a few of them.
       </p>
 
       <div>
@@ -30,14 +32,13 @@
               Changin browser tab or opening other windows will
               <span>invalidate the question.</span>
             </li>
-            <li>this exam will take approx. <span>0-5 minutes.</span></li>
+            <li>This exam will take approx. <span>0-5 minutes.</span></li>
           </ul>
-          <input type="checkbox" />
+          <input id="checkbox" type="checkbox" required />
           <label for=""
-            >i promise to answer myself without help from anyone
+            >I promise to answer myself without help from anyone
           </label>
-
-          <button>Proceed</button>
+          <button>PROCEED</button>
         </form>
       </div>
     </main>
