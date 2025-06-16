@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FILE CSS DI RESET E STILE PRINCIPALE -->
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <!-- FONT DI GOOGLE (Montserrat per il timer, Inter per il testo) -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Epicode quiz</title>
+
+    <!-- LIBRERIA CHART.JS PER IL TIMER CIRCOLARE -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <!-- LOGO EPicode -->
+    <div id="logo">
+      <img src="../assets/image/epicode_logo.png" alt="EPICODE" />
+    </div>
+
+    <!-- TIMER CIRCOLARE -->
+    <div id="timer">
+      <div id="timer-circle">
+        <canvas id="timerChart" width="140" height="140"></canvas>
+        <div id="timerText">
+          <span class="timer-label">SECONDS</span>
+          <span id="timerNumber">60</span>
+          <span class="timer-label">REMAINING</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENITORE PRINCIPALE DEL QUIZ -->
+    <main>
+      <!-- DOMANDA -->
+      <div id="h2-domanda"></div>
+
+      <!-- BOTTONI DELLE RISPOSTE -->
+      <div id="risposte"></div>
+
+      <!-- CONTATORE DELLE DOMANDE -->
+      <div class="question-counter">
+        <p>QUESTION 1 <span>/ 10</span></p>
+      </div>
+    </main>
+
+    <!-- SCRIPT PER IL REDIRECT AUTOMATICO -->
+    <script>
+      // Questa variabile definisce la pagina successiva. Va cambiata in ogni pagina del quiz.
+      var nextPage = "question2.html";
+    </script>
+
+    <!-- SCRIPT DEL TIMER -->
+    <script src="../script/timer.js"></script>
+  </body>
+</html>
