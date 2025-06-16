@@ -16,20 +16,10 @@ body {
   /* Imposta i font di base e il colore del testo */
   font-family: 'Inter', Arial, sans-serif;
   color: white;
-
-  /* Usa Flexbox per centrare il contenuto principale verticalmente e orizzontalmente */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Fa in modo che il main occupi lo spazio rimanente */
 main {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
 }
 
@@ -80,31 +70,29 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Centra perfettamente il testo */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* La tecnica transform(-50%, -50%) garantisce un centraggio matematicamente perfetto */
+  transform: translate(-50%, -50%);
   font-family: 'Montserrat', Arial, sans-serif;
   z-index: 2;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+  text-align: center; /* Centra il testo all'interno del blocco */
   pointer-events: none; /* Permette di cliccare "attraverso" il testo */
 }
 
 #timerText .timer-label {
-  font-size: 0.8em;
-  letter-spacing: 1px;
+  font-size: 0.7em;
+  font-weight: 400;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.1;
+  opacity: 0.8;
 }
 
 #timerNumber {
-  font-size: 2.5em;
-  font-weight: bold;
+  font-size: 3em;
+  font-weight: 700;
   line-height: 1;
-  margin: 2px 0;
+  margin: 0;
+  /* Rimuovo lo spostamento relativo per un controllo più pulito */
 }
 
 
@@ -113,6 +101,10 @@ main {
 \*------------------------------------*/
 .quiz-box {
   /* Contenitore principale per domanda e risposte */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra il box nella pagina */
   padding: 20px;
   width: 90%;
   max-width: 700px;
