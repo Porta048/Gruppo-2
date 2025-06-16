@@ -1,189 +1,126 @@
-/*------------------------------------*\
-    #GENERAL-STYLING
-\*------------------------------------*/
+/* html {
+  font-size: 62.5%;
+  in questo modo mi assicuro che 1rem sia 10px
+  } */
+
 body {
-  /* Imposta l'immagine di sfondo, la centra e la fissa durante lo scroll */
-  background: url('../image/bg.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-image: url(../image/bg.jpg);
+  font-family: "Inter", sans-serif; /* Usa Inter come font principale */
+  color: #fff; /* Colore del testo bianco per contrasto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 150px; /* Aumenta il padding per fare spazio a header e timer */
   background-size: cover;
-
-  /* Assicura che il body copra tutta l'altezza della finestra */
+  background-position: center;
   min-height: 100vh;
-  margin: 0;
-
-  /* Imposta i font di base e il colore del testo */
-  font-family: 'Inter', Arial, sans-serif;
-  color: white;
+  position: relative; /* Necessario per il posizionamento assoluto dei figli */
 }
 
-/* Fa in modo che il main occupi lo spazio rimanente */
-main {
+header {
   width: 100%;
+  position: absolute;
+  top: 2em;
+  left: 0;
+  padding: 0 2em;
+  box-sizing: border-box; /* Assicura che il padding non alteri la larghezza */
 }
 
-
-/*------------------------------------*\
-    #HEADER-ELEMENTS
-\*------------------------------------*/
 #logo {
-  /* Posiziona il logo in alto a sinistra */
   position: absolute;
-  top: 50px;
-  left: 60px;
-  z-index: 10;
+  left: 2em;
+  top: 0;
 }
 
 #logo img {
-  height: 40px;
+  width: 150px; /* Dimensione del logo ridotta */
+  margin-bottom: 0;
 }
 
-
-/*------------------------------------*\
-    #TIMER
-\*------------------------------------*/
 #timer {
-  /* Posiziona il timer in alto a destra, fisso durante lo scroll */
-  position: fixed;
-  top: 50px;
-  right: 60px;
-  z-index: 1000;
+  position: absolute;
+  right: 2em;
+  top: 0;
+  margin-bottom: 0;
 }
 
 #timer-circle {
-  /* Contenitore per il canvas del timer, necessario per il posizionamento del testo */
   position: relative;
   width: 140px;
   height: 140px;
 }
 
-#timerChart {
-  /* Dimensioni del canvas di Chart.js */
-  width: 140px !important;
-  height: 140px !important;
-  display: block;
-}
-
 #timerText {
-  /* Stile per il testo dentro il cerchio del timer */
   position: absolute;
   top: 50%;
   left: 50%;
-  /* La tecnica transform(-50%, -50%) garantisce un centraggio matematicamente perfetto */
   transform: translate(-50%, -50%);
-  font-family: 'Montserrat', Arial, sans-serif;
-  z-index: 2;
-  text-align: center; /* Centra il testo all'interno del blocco */
-  pointer-events: none; /* Permette di cliccare "attraverso" il testo */
+  font-family: "Montserrat", sans-serif; /* Font per il timer */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra il testo orizzontalmente */
+  line-height: 1.2;
 }
 
 #timerText .timer-label {
-  font-size: 0.7em;
-  font-weight: 400;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  line-height: 1.1;
-  opacity: 0.8;
+  font-size: 0.8em;
+  letter-spacing: 2px;
 }
 
 #timerNumber {
-  font-size: 3em;
-  font-weight: 700;
-  line-height: 1;
-  margin: 0;
-  /* Rimuovo lo spostamento relativo per un controllo più pulito */
+  font-size: 2.5em;
+  font-weight: bold;
 }
 
-
-/*------------------------------------*\
-    #QUIZ-BOX
-\*------------------------------------*/
-.quiz-box {
-  /* Contenitore principale per domanda e risposte */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centra il box nella pagina */
-  padding: 20px;
-  width: 90%;
-  max-width: 700px;
+main {
+  width: 100%;
+  max-width: 600px; /* Larghezza massima del quiz */
   text-align: center;
 }
 
-.quiz-box h1 {
-  /* Titolo della domanda */
-  font-family: 'Outfit', 'Montserrat', Arial, sans-serif;
-  font-size: 2.5em;
-  font-weight: 500;
-  margin-bottom: 50px;
-  line-height: 1.4;
+#h2-domanda h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8em; /* Dimensione del testo della domanda */
+  margin-bottom: 2em;
 }
 
-
-/*------------------------------------*\
-    #ANSWERS
-\*------------------------------------*/
-.answers {
-  /* Griglia per i bottoni delle risposte */
+#risposte {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Due colonne di larghezza uguale */
-  gap: 25px;
-  margin-bottom: 50px;
+  grid-template-columns: 1fr 1fr; /* Due colonne per le risposte */
+  gap: 1em; /* Spazio tra i bottoni */
+  margin-bottom: 2em;
 }
 
-.answer-btn {
-  /* Stile dei bottoni di risposta */
+.answer-option {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid white;
-  color: white;
-  border-radius: 30px;
-  padding: 15px;
-  font-size: 1.1em;
-  font-family: 'Inter', Arial, sans-serif;
+  border: 2px solid transparent;
+  padding: 1em;
+  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: left;
 }
 
-.answer-btn.selected {
-  /* Stile per il bottone selezionato (colore magenta) */
-  background: linear-gradient(90deg, #d20094 0%, #900080 100%);
-  border-color: transparent;
+.answer-option:hover {
+  background-color: #d20094; /* Colore al passaggio del mouse */
 }
 
-.answer-btn:hover {
-  /* Effetto al passaggio del mouse */
-  background-color: rgba(255, 255, 255, 0.2);
+.answer-option.selected {
+  background-color: #d20094;
+  border-color: #00ffff;
 }
 
+.answer-option input[type="radio"] {
+  display: none; /* Nasconde i radio button originali */
+}
 
-/*------------------------------------*\
-    #QUESTION-COUNTER
-\*------------------------------------*/
 .question-counter {
-  /* Contatore "QUESTION X / 10" */
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.2em;
-  font-weight: bold;
   letter-spacing: 2px;
 }
 
 .question-counter span {
-  color: #999;
-}
-
-
-/*------------------------------------*\
-    #RESPONSIVE
-\*------------------------------------*/
-@media (max-width: 768px) {
-  /* Adatta il layout per schermi più piccoli */
-  .answers {
-    grid-template-columns: 1fr; /* Una sola colonna per le risposte */
-  }
-
-  /* Riposiziona logo e timer per dare più spazio */
-  #timer { right: 20px; top: 20px; }
-  #logo { left: 20px; top: 30px; }
-  .quiz-box h1 { font-size: 2em; }
+  color: #d20094;
+  font-weight: bold;
 }
