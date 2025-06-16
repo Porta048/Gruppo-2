@@ -1,1 +1,250 @@
+/* 
+  ===================================
+  EPICODE QUIZ - STILE PRINCIPALE
+  ===================================
+  Questo file contiene tutti gli stili per la pagina del quiz
+*/
 
+/* 
+  IMPOSTAZIONI BASE DEL BODY
+  - Sfondo con immagine
+  - Font principale Inter
+  - Layout flessibile verticale
+  - Colore testo bianco per contrasto
+*/
+body {
+  background-image: url(../image/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 
+  HEADER - Contiene logo e timer
+  - Logo posizionato a sinistra
+  - Timer posizionato a destra
+  - Uso posizionamento assoluto per controllo preciso
+*/
+header {
+  position: absolute;
+  top: 2em;
+  left: 0;
+  width: 100%;
+  padding: 0 2em;
+  box-sizing: border-box;
+}
+
+/* 
+  LOGO EPICODE - Posizione alto sinistra
+*/
+#logo {
+  position: absolute;
+  left: 2em;
+  top: 0;
+}
+
+#logo img {
+  width: 150px;
+  height: auto;
+}
+
+/* 
+  TIMER CIRCOLARE - Posizione alto destra
+*/
+#timer {
+  position: absolute;
+  right: 2em;
+  top: 0;
+}
+
+/* Contenitore del cerchio del timer */
+#timer-circle {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+/* 
+  TESTO DEL TIMER - Sovrapposto al grafico circolare
+  - Centrato perfettamente nel cerchio
+  - Font Montserrat per eleganza
+  - Layout verticale con Flexbox
+*/
+#timerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Etichette "SECONDS" e "REMAINING" */
+#timerText .timer-label {
+  font-size: 0.6em;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+/* Numero del countdown */
+#timerNumber {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 0.1em 0;
+}
+
+/* 
+  CONTENUTO PRINCIPALE DEL QUIZ
+  - Centrato verticalmente e orizzontalmente
+  - Margine superiore per non sovrapporsi all'header
+*/
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 120px; /* Spazio per header */
+  padding-bottom: 2em;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 
+  CONTENITORE DELLA DOMANDA
+*/
+#h2-domanda h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 2em;
+  line-height: 1.3;
+}
+
+/* 
+  CONTENITORE DELLE RISPOSTE
+  - Griglia a 2 colonne per layout ordinato
+  - Spazio uniforme tra i bottoni
+*/
+#risposte {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+/* 
+  SINGOLA OPZIONE DI RISPOSTA
+  - Sfondo semi-trasparente
+  - Bordo arrotondato per design moderno
+  - Effetti hover e selezione
+*/
+.answer-option {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  padding: 1.2em;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-weight: 400;
+}
+
+/* Effetto hover - cambia colore al passaggio del mouse */
+.answer-option:hover {
+  background-color: #d20094;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Stato selezionato - evidenzia la risposta scelta */
+.answer-option.selected {
+  background-color: #d20094;
+  border-color: #00ffff;
+}
+
+/* Nasconde i radio button nativi del browser */
+.answer-option input[type="radio"] {
+  display: none;
+}
+
+/* 
+  PULSANTE AVANTI
+  - Appare quando l'utente seleziona una risposta
+  - Design moderno con colori del brand
+  - Inizialmente nascosto
+*/
+#next-button {
+  background-color: #d20094;
+  color: #fff;
+  border: 2px solid #d20094;
+  padding: 1em 2.5em;
+  border-radius: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1.5em 0;
+  display: none; /* Inizialmente nascosto */
+}
+
+/* Effetto hover per il pulsante */
+#next-button:hover {
+  background-color: #00ffff;
+  color: #000;
+  border-color: #00ffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+}
+
+/* 
+  CONTATORE DELLE DOMANDE
+  - Mostra il progresso (es: "QUESTION 1 / 10")
+  - Font Montserrat per coerenza con il timer
+*/
+.question-counter {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  margin-top: 1em;
+}
+
+/* Evidenzia il numero totale delle domande */
+.question-counter span {
+  color: #d20094;
+  font-weight: bold;
+}
+
+/* 
+  ===================================
+  CLASSI UTILITY (mantenute per compatibilità)
+  ===================================
+*/
+
+/* Classe per elementi selezionati (usata da JavaScript) */
+.selected {
+  /* Stili già definiti sopra per .answer-option.selected */
+}
+
+/* Classe per background (usata in altre pagine) */
+.bg {
+  background-image: url(../image/bg.jpg);
+}
+
+/* Classe per bottoni (usata in altre pagine) */
+.button-more-proceed {
+  /* Stili da definire se necessario */
+}
