@@ -96,31 +96,75 @@ const questions = [
   },
 ];
 
-let index = 0;
-let risposteDate = [];
-//trova div h2
+// Mescola un array
+const mischiaArray = (array) => {
+  for (let i = 0; i < array.length - 1; i++) {
+    const b = i + Math.floor(Math.random() * (array.length - i));
+    [array[i], array[b]] = [array[b], array[i]];
+  }
+  return array;
+};
+
+// Salva le risposte dell'utente
+let userAnswers = [];
+let currentQuestionIndex = 0;
+
+// Seleziona risposta e aggiorna visivamente
+const selezionaRisposta = (answer, selectedDiv) => {
+  document.querySelectorAll(".answer-option").forEach((div) => {
+    div.classList.remove("selected");
+  });
+
+  selectedDiv.classList.add("selected");
+  selectedDiv.querySelector('input[type="radio"]').checked = true;
+
+  userAnswers[currentQuestionIndex] = answer;
+};
+
+// Seleziona e prepara i contenitori
 const divH2 = document.getElementById("h2-domanda");
-// Aggiungi h2 per domanda
 const h2 = document.createElement("h2");
-//appendi h2 al padre
 divH2.appendChild(h2);
-// creo div di risposte
+
 const risposteDiv = document.getElementById("risposte");
 risposteDiv.innerHTML = "";
 
-//funzione crea domanda
+// Funzione per creare una domanda
 const creaDomanda = (index) => {
-  //crea domanda
   const domanda = questions[index];
-  //cambia valore h2
   h2.innerHTML = domanda.question;
+  risposteDiv.innerHTML = "";
 
-  //della singola domanda creo array di domande corrette e incorrette
   const tutteLeRispostePossibili = [
     domanda.correct_answer,
     ...domanda.incorrect_answers,
   ];
 
-  // Mescola le risposte per renderle casuali
-  const risposteMischiate = shuffleArray([...tutteLeRispostePossibili]);
+  const risposteMischiate = mischiaArray([...tutteLeRispostePossibili]);
+
+  risposteMischiate.forEach((answer, answerIndex) => {
+    const singolaRispostaDiv = document.createElement("div");
+    singolaRispostaDiv.className = "answer-option";
+
+    const selezionata = userAnswers[currentQuestionIndex] === answer;
+    if (selezionata) {
+      singolaRispostaDiv.classList.add("selected");
+    }
+
+    singolaRispostaDiv.innerHTML = `
+      <input type="radio" name="answer" value="${answer}" id="answer-${answerIndex}" ${
+      selezionata ? "checked" : ""
+    }>
+      <label for="answer-${answerIndex}">${answer}</label>
+    `;
+
+    singolaRispostaDiv.addEventListener("click", () =>
+      selezionaRisposta(answer, singolaRispostaDiv)
+    );
+
+    risposteDiv.appendChild(singolaRispostaDiv);
+  });
 };
+
+// Avvio della prima domanda
+creaDomanda(currentQuestionIndex);
