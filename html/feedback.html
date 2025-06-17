@@ -3,40 +3,137 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/feedback-style.css" />
+    <title>Epicode</title>
   </head>
   <body>
     <header>
-      <div>
+      <div id="logo">
         <!--Here goes The Epicode Logo-->
+        <img src="../assets/image/epicode_logo.png" alt="epicode-logo" />
       </div>
-      <h1>Tell us how it's going</h1>
     </header>
+
     <main>
-      <p>
-        From 0 to 10, how likely are you to reccomend EPICODE to a friend or a
-        colleague ?
-      </p>
+      <div id="container">
+        <h1>Tell us how it's going</h1>
+        <form>
+          <p>
+            From 0 to 10, how likely are you to reccomend EPICODE <br />
+            to a friend or a colleague ?
+          </p>
+          <!-- QUESTO è IL RANGE DI RIFERIMENTO NASCOSTO -->
+          <div id="svg-slider">
+            <input
+              type="range"
+              value="5"
+              min="0"
+              max="10"
+              step="1"
+              id="custom-range" />
+            <!-- QUI VANNO LE STELLINE -->
+            <div class="svg-steps">
+              <img src="../assets/image/star.svg" data-step="0" />
+              <img src="../assets/image/star.svg" data-step="1" />
+              <img src="../assets/image/star.svg" data-step="2" />
+              <img src="../assets/image/star.svg" data-step="3" />
+              <img src="../assets/image/star.svg" data-step="4" />
+              <img src="../assets/image/star.svg" data-step="5" />
+              <img src="../assets/image/star.svg" data-step="6" />
+              <img src="../assets/image/star.svg" data-step="7" />
+              <img src="../assets/image/star.svg" data-step="8" />
+              <img src="../assets/image/star.svg" data-step="9" />
+            </div>
+          </div>
 
-      <section>
-        <!--Here Goes The Stars-->
-      </section>
+          <p>Leave us an open feedback about your experience so far</p>
 
-      <p>Leave us an open feedback about your experience so far</p>
+          <input
+            id="text"
+            type="text"
+            placeholder="Write your comment here"
+            required />
 
-      <form action="">
-        <label for="">
-          Leave us an open feedback about your experience so far
-        </label>
-        <textarea
-          name=""
-          id=""
-          placeholder="Write your comment here"
-        ></textarea>
-      </form>
-
-      <button>MORE INFO</button>
+          <button id="goToEpicode">MORE INFO</button>
+        </form>
+      </div>
     </main>
-    <footer></footer>
+    <script>
+      /**
+       * Questo script gestisce tutta l'interattività della pagina di feedback.
+       * Viene eseguito solo quando l'intera pagina HTML è stata caricata,
+       * grazie a 'DOMContentLoaded'.
+       */
+      document.addEventListener('DOMContentLoaded', () => {
+
+        // Per prima cosa, troviamo tutti gli elementi <img> che rappresentano le stelle
+        // e li mettiamo in una lista chiamata 'stars'.
+        const stars = document.querySelectorAll('.svg-steps img');
+        
+        // --- PARTE 1: IMPOSTAZIONE INIZIALE DELLE STELLE ---
+        // Vogliamo che la pagina inizi con una valutazione di 5 stelle.
+
+        // Questa funzione si occupa di impostare lo stato iniziale.
+        const setDefaultStars = () => {
+          // Stabiliamo che la valutazione iniziale è 5.
+          const initialRating = 5; 
+          // Ora, per ogni stella nella nostra lista...
+          stars.forEach(star => {
+              // ...leggiamo il suo numero (da 0 a 9) dall'attributo 'data-step'.
+              const currentStarStep = parseInt(star.dataset.step, 10);
+              // Se il numero della stella è minore di 5 (quindi 0, 1, 2, 3, 4)...
+              if (currentStarStep < initialRating) {
+                  // ...le aggiungiamo la classe 'active', che nel CSS la colora.
+                  star.classList.add('active');
+              }
+          });
+        };
+        
+        // Eseguiamo la funzione una sola volta, appena la pagina è pronta.
+        setDefaultStars();
+
+        // --- PARTE 2: GESTIONE DEL CLICK SULLE STELLE ---
+        // Questa parte rende le stelle interattive.
+
+        // Per ogni stella nella lista...
+        stars.forEach(star => {
+          // ...ci mettiamo in ascolto per un "click".
+          star.addEventListener('click', () => {
+            // Quando una stella viene cliccata, leggiamo il suo numero.
+            const clickedStarStep = parseInt(star.dataset.step, 10);
+
+            // Poi, cicliamo di nuovo su TUTTE le stelle per aggiornarle.
+            stars.forEach(s => {
+              const currentStarStep = parseInt(s.dataset.step, 10);
+              // Se il numero della stella è minore o uguale a quello della stella cliccata...
+              if (currentStarStep <= clickedStarStep) {
+                // ...la attiviamo (la coloriamo).
+                s.classList.add('active');
+              } else {
+                // ...altrimenti, la disattiviamo (la facciamo tornare grigia).
+                s.classList.remove('active');
+              }
+            });
+          });
+        });
+
+        // --- PARTE 3: GESTIONE DEL PULSANTE "MORE INFO" ---
+        
+        // Troviamo il pulsante tramite il suo ID.
+        const moreInfoButton = document.getElementById('goToEpicode');
+        
+        // Se il pulsante esiste...
+        if (moreInfoButton) {
+          // ...ci mettiamo in ascolto per un "click".
+          moreInfoButton.addEventListener('click', (event) => {
+            // Impediamo al browser di ricaricare la pagina (comportamento standard dei form).
+            event.preventDefault(); 
+            // Apriamo il sito di Epicode in una nuova scheda.
+            window.open('https://epicode.com/it/', '_blank');
+          });
+        }
+      });
+    </script>
   </body>
 </html>

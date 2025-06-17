@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  background-image: url(../image/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: table;
+  width: 100%;
+}
+#logo {
+  position: absolute;
+  top: 50px;
+  left: 60px;
+  z-index: 10;
+}
+#logo img {
+  height: 40px;
+}
+#container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+}
+#container h1 {
+  font-family: "Montserrat";
+  font-size: 3em;
+  font-weight: 700;
+  line-height: 2;
+}
+#container p {
+  font-family: "Montserrat";
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.5em;
+  margin-bottom: 20px;
+}
+
+#custom-range {
+  display: none;
+}
+.svg-steps {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+.svg-steps img {
+  width: 45px;
+  margin: 0.3em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  filter: grayscale(100%) brightness(0);
+}
+.svg-steps img.active {
+  filter: none;
+}
+
+#text {
+  display: block;
+  font-size: 1rem;
+  width: 60%;
+  color: white;
+  margin: 2rem auto;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #ca2275;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+button {
+  background: #00ffff;
+  color: #000;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1rem;
+  font-family: "Montserrat";
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3),
+    0 0 45px rgba(0, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+button:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4),
+    0 0 60px rgba(0, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 1.2rem;
+  }
+  main {
+    max-width: 1200px;
+  }
+  #logo img {
+    width: 300px;
+    height: 100%;
+  }
+}
