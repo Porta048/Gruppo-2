@@ -22,22 +22,25 @@ body {
 }
 #container {
   position: absolute;
-  top: 35%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%); /* Centra il box nella pagina */
-  padding: 20px;
   width: 90%;
   max-width: 700px;
   text-align: center;
 }
 #container h1 {
-  font-size: 4em;
+  font-family: "Montserrat";
+  font-size: 3em;
   font-weight: 700;
-  margin-bottom: 50px;
-  line-height: 1.4;
+  line-height: 2;
 }
 #container p {
-  font-size: 2em;
+  font-family: "Montserrat";
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.5em;
+  margin-bottom: 20px;
 }
 
 #custom-range {
@@ -45,16 +48,28 @@ body {
 }
 .svg-steps {
   width: 100%;
+  margin-bottom: 5rem;
 }
 .svg-steps img {
-  width: 50px;
+  width: 45px;
   margin: 0.3em;
   cursor: pointer;
-  opacity: 0.4;
   transition: opacity 0.2s;
+  filter: grayscale(100%) brightness(0);
 }
 .svg-steps img.active {
-  opacity: 1;
+  filter: none;
+}
+
+#text {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid #ca2275;
+  padding-left: 1rem;
+  padding-bottom: 0.5rem;
 }
 button {
   background: #00ffff;
@@ -62,8 +77,8 @@ button {
   border: none;
   padding: 1rem 3rem;
   font-size: 1rem;
+  font-family: "Montserrat";
   font-weight: 700;
-  letter-spacing: 1px;
   cursor: pointer;
   align-self: flex-start;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3),

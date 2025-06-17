@@ -20,14 +20,14 @@
         <h1>Tell us how it's going</h1>
         <form>
           <p>
-            From 0 to 10, how likely are you to reccomend EPICODE to a friend or
-            a colleague ?
+            From 0 to 10, how likely are you to reccomend EPICODE <br />
+            to a friend or a colleague ?
           </p>
           <!-- QUESTO è IL RANGE DI RIFERIMENTO NASCOSTO -->
           <div id="svg-slider">
             <input
               type="range"
-              value="10"
+              value="5"
               min="0"
               max="10"
               step="1"
@@ -49,10 +49,12 @@
 
           <p>Leave us an open feedback about your experience so far</p>
 
-          <textarea
-            id="comment"
+          <input
+            id="text"
+            type="text"
             placeholder="Write your comment here"
-            required></textarea>
+            required />
+
           <button>MORE INFO</button>
         </form>
       </div>
