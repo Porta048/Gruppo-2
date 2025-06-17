@@ -108,6 +108,7 @@ const mischiaArray = (array) => {
 // Salva le risposte dell'utente
 let userAnswers = [];
 let currentQuestionIndex = 0;
+let score = 0;
 
 // Seleziona risposta e aggiorna visualmente
 const selezionaRisposta = (answer, selectedDiv) => {
@@ -119,23 +120,34 @@ const selezionaRisposta = (answer, selectedDiv) => {
   selectedDiv.querySelector('input[type="radio"]').checked = true;
 
   userAnswers[currentQuestionIndex] = answer;
-  
+
   // Mostra il pulsante "Avanti" quando viene selezionata una risposta
-  const nextButton = document.getElementById('next-button');
+  const nextButton = document.getElementById("next-button");
   if (nextButton) {
-    nextButton.style.display = 'block';
+    nextButton.style.display = "block";
+  }
+};
+const verificaRispostaCorrente = () => {
+  const domanda = questions[currentQuestionIndex];
+  const rispostaUtente = userAnswers[currentQuestionIndex];
+
+  if (rispostaUtente === domanda.correct_answer) {
+    score++;
   }
 };
 
 // Funzione per gestire il click del pulsante "Avanti"
 const prossimaAnswerOption = () => {
+  // verifico se la risposta corrente è corretta
+  // con la funzione precedentemente creata
+  verificaRispostaCorrente();
   // Procedi alla prossima domanda
   procediAllaProssimaDomanda();
-  
+
   // Nascondi il pulsante per la prossima domanda
-  const nextButton = document.getElementById('next-button');
+  const nextButton = document.getElementById("next-button");
   if (nextButton) {
-    nextButton.style.display = 'none';
+    nextButton.style.display = "none";
   }
 };
 
@@ -182,11 +194,11 @@ const creaDomanda = (index) => {
 
     risposteDiv.appendChild(singolaRispostaDiv);
   });
-  
+
   // Nascondi il pulsante "Avanti" all'inizio di ogni nuova domanda
-  const nextButton = document.getElementById('next-button');
+  const nextButton = document.getElementById("next-button");
   if (nextButton) {
-    nextButton.style.display = 'none';
+    nextButton.style.display = "none";
   }
 };
 
@@ -194,6 +206,6 @@ const creaDomanda = (index) => {
 creaDomanda(currentQuestionIndex);
 
 // Aggiorna il contatore per la prima domanda (se la funzione è disponibile)
-if (typeof aggiornaContatore === 'function') {
+if (typeof aggiornaContatore === "function") {
   aggiornaContatore();
 }
