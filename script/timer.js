@@ -1,11 +1,18 @@
 // Variabili globali per il controllo del timer
-let timerInterval;
-let timeLeft;
-let timerChart;
+let timerInterval; // Contiene l'intervallo del timer, per poterlo fermare
+let timeLeft;      // Tiene traccia dei secondi rimanenti
+let timerChart;    // Oggetto che rappresenta il grafico circolare
 
-const totalTime = 60; // Tempo totale in secondi
+const totalTime = 60; // Tempo totale in secondi per ogni domanda
 
-// Funzione per aggiornare il timer e il grafico
+/**
+ * FUNZIONE: updateTimer
+ * SCOPO: Viene chiamata ogni secondo per aggiornare il timer.
+ * - Diminuisce il tempo di 1 secondo.
+ * - Aggiorna il grafico circolare.
+ * - Aggiorna il numero visualizzato.
+ * - Se il tempo scade, passa alla domanda successiva.
+ */
 const updateTimer = () => {
   timeLeft--;
 
@@ -19,16 +26,23 @@ const updateTimer = () => {
   // Se il tempo scade, avanza alla prossima domanda
   if (timeLeft <= 0) {
     clearInterval(timerInterval);
-    // Reindirizza alla pagina successiva definita nell'HTML
-    if (typeof nextPage !== 'undefined') {
-      window.location.href = nextPage;
+    // Usa il sistema intelligente di scorrimento domande
+    if (typeof procediAllaProssimaDomanda === 'function') {
+      procediAllaProssimaDomanda();
     } else {
-      console.error('La variabile nextPage non è definita.');
+      console.error('La funzione procediAllaProssimaDomanda non è disponibile.');
     }
   }
 };
 
-// Funzione per resettare e avviare il timer
+/**
+ * FUNZIONE: startTimer
+ * SCOPO: Fa partire il timer da 60 secondi.
+ * - Ferma qualsiasi timer precedente.
+ * - Imposta il tempo a 60 secondi.
+ * - Resetta il grafico.
+ * - Avvia il conto alla rovescia.
+ */
 const startTimer = () => {
   clearInterval(timerInterval); // Assicura che non ci siano timer multipli attivi
   timeLeft = totalTime;
@@ -44,7 +58,12 @@ const startTimer = () => {
   timerInterval = setInterval(updateTimer, 1000);
 };
 
-
+/**
+ * CODICE ESEGUITO AL CARICAMENTO DELLA PAGINA
+ * - Prende il canvas dall'HTML.
+ * - Crea il grafico circolare usando la libreria Chart.js.
+ * - Fa partire il timer per la prima domanda.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const canvasElement = document.getElementById('timerChart');
     if (!canvasElement) {
@@ -60,19 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
             data: {
                 datasets: [{
                     data: [totalTime, 0],
-                    backgroundColor: ['#00e0ff', '#3a2a4d'],
+                    backgroundColor: ['#00e0ff', '#3a2a4d'], // Colore del tempo / Colore dello sfondo
                     borderWidth: 0
                 }]
             },
             options: {
-                cutout: '80%',
+                cutout: '80%', // Spessore del cerchio
                 responsive: false,
                 plugins: {
                     legend: { display: false },
                     tooltip: { enabled: false }
                 },
                 animation: {
-                    duration: 0 // Disabilita l'animazione per aggiornamenti istantanei
+                    duration: 0 // Nessuna animazione per aggiornamenti puliti
                 }
             }
         });
