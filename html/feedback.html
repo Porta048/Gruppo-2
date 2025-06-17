@@ -59,6 +59,36 @@
         </form>
       </div>
     </main>
-    <script src="../script/formFeedback.js"></script>
+    <script>
+      // Inseriamo lo script direttamente qui per evitare errori dal file esterno.
+      document.addEventListener('DOMContentLoaded', () => {
+        const stars = document.querySelectorAll('.svg-steps img');
+        
+        if (stars.length > 0) {
+          stars.forEach(star => {
+            star.addEventListener('click', () => {
+              const clickedStarStep = parseInt(star.dataset.step, 10);
+              stars.forEach(s => {
+                const currentStarStep = parseInt(s.dataset.step, 10);
+                if (currentStarStep <= clickedStarStep) {
+                  s.classList.add('active');
+                } else {
+                  s.classList.remove('active');
+                }
+              });
+            });
+          });
+        }
+
+        const moreInfoButton = document.getElementById('goToEpicode');
+        
+        if (moreInfoButton) {
+          moreInfoButton.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            window.open('https://epicode.com/it/', '_blank');
+          });
+        }
+      });
+    </script>
   </body>
 </html>
