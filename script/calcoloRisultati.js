@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const correctPerc = document.getElementById("correct-percentage");
   // targhetto h2
-  correctPerc.innerHTML = `Correct <br> ${correctPercentage}%`;
+  correctPerc.innerHTML = `Correct <br> <span>${correctPercentage}%</span>`;
   // gli assegno il valore
   const correctValue = document.getElementById("correct-value");
   // targhetto p
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // gli assegno il valore
   const wrongPerc = document.getElementById("wrong-percentage");
   // targhetto h2
-  wrongPerc.innerHTML = `Wrong <br> ${wrongPercentage}%`;
+  wrongPerc.innerHTML = `Wrong <br> <span>${wrongPercentage}%</span>`;
   // gli assegno il valore
   const wrongValue = document.getElementById("wrong-value");
   // targhetto p
@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (correctPercentage >= 60) {
     examState.innerHTML = `
         <h2>Congratulations! <br> <span>You passed the exam.</span></h2>
-        <p>We'll send you the certificate in few minutes. Check your email (including promotions / spam folder)</p>
+        <p>We'll send you the certificate <br> in few minutes. <br> Check your email (including <br> promotions / spam folder)</p>
       `;
   } else {
     examState.innerHTML = `
         <h2>Unfortunately, <br> <span>you did not pass.</span></h2>
-        <p>Try again to improve your score!</p>
+        <p>Try again to improve <br> your score!</p>
       `;
   }
   // --- LOGICA DELLA CIAMBELLA (CHART.JS) ---
