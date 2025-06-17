@@ -109,7 +109,7 @@ const mischiaArray = (array) => {
 let userAnswers = [];
 let currentQuestionIndex = 0;
 
-// Seleziona risposta e aggiorna visivamente
+// Seleziona risposta e aggiorna visualmente
 const selezionaRisposta = (answer, selectedDiv) => {
   document.querySelectorAll(".answer-option").forEach((div) => {
     div.classList.remove("selected");
@@ -119,6 +119,24 @@ const selezionaRisposta = (answer, selectedDiv) => {
   selectedDiv.querySelector('input[type="radio"]').checked = true;
 
   userAnswers[currentQuestionIndex] = answer;
+  
+  // Mostra il pulsante "Avanti" quando viene selezionata una risposta
+  const nextButton = document.getElementById('next-button');
+  if (nextButton) {
+    nextButton.style.display = 'block';
+  }
+};
+
+// Funzione per gestire il click del pulsante "Avanti"
+const prossimaAnswerOption = () => {
+  // Procedi alla prossima domanda
+  procediAllaProssimaDomanda();
+  
+  // Nascondi il pulsante per la prossima domanda
+  const nextButton = document.getElementById('next-button');
+  if (nextButton) {
+    nextButton.style.display = 'none';
+  }
 };
 
 // Seleziona e prepara i contenitori
@@ -164,7 +182,18 @@ const creaDomanda = (index) => {
 
     risposteDiv.appendChild(singolaRispostaDiv);
   });
+  
+  // Nascondi il pulsante "Avanti" all'inizio di ogni nuova domanda
+  const nextButton = document.getElementById('next-button');
+  if (nextButton) {
+    nextButton.style.display = 'none';
+  }
 };
 
 // Avvio della prima domanda
 creaDomanda(currentQuestionIndex);
+
+// Aggiorna il contatore per la prima domanda (se la funzione è disponibile)
+if (typeof aggiornaContatore === 'function') {
+  aggiornaContatore();
+}

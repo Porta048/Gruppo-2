@@ -1,35 +1,244 @@
-/* html {
-  font-size: 62.5%;
-  in questo modo mi assicuro che 1rem sia 10px
-  } */
+/* 
+  =================================
+  FOGLIO DI STILE - QUIZ EPICODE
+  =================================
+*/
 
-.selected {
-}
-.bg {
-  /* classe per background */
-  background-image: url(../image/bg.jpg);
-}
-.button-more-proceed {
-}
-
+/* 
+  IMPOSTAZIONI GENERALI DELLA PAGINA
+  - Sfondo a tutta pagina
+  - Allineamento verticale del contenuto
+*/
 body {
   background-image: url(../image/bg.jpg);
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #f0f0f0;
   background-size: cover;
+  background-position: center;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: table;
+  width: 100%;
 }
-#countdown {
-  font-size: 2em;
+
+/* 
+  HEADER (PARTE SUPERIORE)
+  Contiene il logo e il timer.
+  Usa 'position: absolute' per rimanere fisso in alto.
+*/
+header {
+  position: absolute;
+  top: 2em;
+  left: 0;
+  width: 100%;
+  padding: 0 2em;
+  box-sizing: border-box;
+}
+
+/* 
+  LOGO EPICODE
+  Posizionato in alto a sinistra.
+*/
+#logo {
+  position: absolute;
+  left: 2em;
+  top: 0;
+}
+
+#logo img {
+  width: 150px;
+  height: auto;
+}
+
+/* 
+  TIMER CIRCOLARE
+  Posizionato in alto a destra.
+*/
+#timer {
+  position: absolute;
+  right: 2em;
+  top: 0;
+}
+
+/* 
+  TESTO DENTRO IL TIMER (Numero e scritte)
+  Ogni elemento è posizionato in modo assoluto
+  per un centramento perfetto.
+*/
+#timerText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* NUMERO DEL TIMER (es. "50") */
+#timerNumber {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Tecnica per centrare */
+  font-size: 1.8em;
   font-weight: bold;
-  color: #333;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+
+/* SCRITTE "SECONDS" E "REMAINING" */
+#timerText .timer-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Centra orizzontalmente */
+  font-size: 0.6em;
+  letter-spacing: 2px;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+}
+
+/* "SECONDS" (posizionata in alto) */
+#timerText .timer-label:first-child {
+  top: 35px;
+}
+
+/* "REMAINING" (posizionata in basso) */
+#timerText .timer-label:last-child {
+  bottom: 35px;
+}
+
+/* 
+  CONTENITORE PRINCIPALE (Domanda, risposte, etc.)
+  Allineato al centro dello schermo.
+*/
+main {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  padding-top: 120px;
+  padding-bottom: 2em;
+}
+
+/* TESTO DELLA DOMANDA */
+#h2-domanda h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 2em;
+  line-height: 1.4;
+}
+
+/* 
+  AREA DELLE RISPOSTE
+  Griglia a 2 colonne, più stretta della domanda.
+*/
+#risposte {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  width: 80%;
+  margin: 0 auto 2em;
+}
+
+/* 
+  STILE DEI SINGOLI BOTTONI DI RISPOSTA
+*/
+.answer-option {
+  background-color: rgba(1, 1, 23, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1.2em;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-weight: 400;
+}
+
+/* Stile quando passi il mouse sopra una risposta */
+.answer-option:hover {
+  background-color: #d20094;
+  border-color: #d20094;
+}
+
+/* Stile della risposta selezionata */
+.answer-option.selected {
+  background-color: #d20094;
+  border-color: #d20094;
+}
+
+/* Nasconde i pallini dei radio button */
+.answer-option input[type="radio"] {
+  display: none;
+}
+
+/* 
+  PULSANTE "AVANTI"
+  Appare dopo aver scelto una risposta.
+  Inizialmente è nascosto.
+*/
+#next-button {
+  background-color: #d20094;
+  color: #fff;
+  border: 2px solid #d20094;
+  padding: 1em 2.5em;
+  border-radius: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1.5em auto;
+  display: none; /* Nascosto di base */
+  width: 200px;
+}
+
+/* Stile quando passi il mouse sul pulsante "Avanti" */
+#next-button:hover {
+  background-color: #00ffff;
+  color: #000;
+  border-color: #00ffff;
+}
+
+/* 
+  CONTATORE DOMANDE (es. "QUESTION 1 / 10")
+*/
+.question-counter {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  margin-top: 1em;
+}
+
+/* Stile del numero totale (es. "/ 10") */
+.question-counter span {
+  color: #d20094;
+  font-weight: bold;
+}
+
+/* 
+  ===================================
+  CLASSI UTILITY (mantenute per compatibilità)
+  ===================================
+*/
+
+/* Classe per elementi selezionati (usata da JavaScript) */
+.selected {
+  /* Stili già definiti sopra per .answer-option.selected */
+}
+
+/* Classe per background (usata in altre pagine) */
+.bg {
+  background-image: url(../image/bg.jpg);
+}
+
+/* Classe per bottoni (usata in altre pagine) */
+.button-more-proceed {
+  /* Stili da definire se necessario */
 }
