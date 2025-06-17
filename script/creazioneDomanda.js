@@ -108,6 +108,7 @@ const mischiaArray = (array) => {
 // Salva le risposte dell'utente
 let userAnswers = [];
 let currentQuestionIndex = 0;
+let score = 0; // Punteggio iniziale. Viene incrementato per ogni risposta corretta.
 
 // Seleziona risposta e aggiorna visualmente
 const selezionaRisposta = (answer, selectedDiv) => {
@@ -129,6 +130,21 @@ const selezionaRisposta = (answer, selectedDiv) => {
 
 // Funzione per gestire il click del pulsante "Avanti"
 const prossimaAnswerOption = () => {
+  // --- LOGICA DI CONTROLLO PUNTEGGIO ---
+  // Prima di passare alla domanda successiva, controlliamo se la risposta data è corretta.
+
+  const domandaCorrente = questions[currentQuestionIndex]; // L'oggetto della domanda attuale
+  const rispostaUtente = userAnswers[currentQuestionIndex]; // La stringa della risposta scelta dall'utente
+
+  // Confrontiamo la risposta dell'utente con la risposta corretta per la domanda attuale.
+  if (rispostaUtente === domandaCorrente.correct_answer) {
+    score++; // Se sono uguali, incrementiamo il punteggio.
+    console.log(`Risposta corretta! Punteggio attuale: ${score}`);
+  } else {
+    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
+  }
+  // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
+
   // Procedi alla prossima domanda
   procediAllaProssimaDomanda();
   
