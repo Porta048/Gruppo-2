@@ -4,7 +4,7 @@ const icons = document.querySelectorAll(".svg-steps img");
 
 //attivare una stella
 //classe per attivarla
-const updateIcons = (value) => {
+const attivaStelle = (value) => {
   icons.forEach((icon, index) => {
     icon.classList.toggle("active", index <= value);
   });
@@ -13,8 +13,8 @@ const updateIcons = (value) => {
 icons.forEach((icon, index) => {
   icon.addEventListener("click", () => {
     range.value = index;
-    updateIcons(index);
+    attivaStelle(index);
   });
 });
 //invoco la funzione
-updateIcons(range.value);
+attivaStelle(range.value);

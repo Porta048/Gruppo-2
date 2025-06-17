@@ -83,35 +83,23 @@ button {
   align-self: flex-start;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3),
     0 0 45px rgba(0, 255, 255, 0.1);
-
-  transition: all 0.3s ease; /* Transizione fluida per hover /
-text-transform: uppercase; / Testo maiuscolo per impatto */
+  transition: all 0.3s ease;
 }
-
-/* 
- 
-EFFETTO HOVER DEL PULSANTE
-Intensifica l'effetto glow e aggiunge un leggero movimento verso l'alto
-per feedback visivo dell'interazione*/
 button:hover:not(:disabled) {
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4),
     0 0 60px rgba(0, 255, 255, 0.2);
   transform: translateY(-1px);
 }
 
-/* 
- Questa regola si attiva solo su schermi più larghi di 1600px
-  per migliorare la leggibilità e l'aspetto del quiz. */
-@media (min-width: 1600px) {
+@media (min-width: 1800px) {
   html {
-    font-size: 18px; /* Aumenta la dimensione base del testo */
+    font-size: 1.2rem;
   }
-
   main {
-    max-width: 800px; /* Allarga l'area del quiz */
+    max-width: 1200px;
   }
-
   #logo img {
-    width: 200px; /* Ingrandisce leggermente il logo */
+    width: 300px;
+    height: 100%;
   }
 }
