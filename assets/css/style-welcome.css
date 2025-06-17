@@ -16,18 +16,20 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   color: white;
   text-align: start;
+  max-width: 1440px;
+  max-height: 800px;
 }
 
 /* Fa in modo che il main occupi lo spazio rimanente */
 main {
-  margin: 3rem 0rem 2rem 10rem;
+  margin: 3rem 0rem 2rem 8rem;
   width: 100%;
   font-size: 1.5em;
 }
 #logo {
   /* Posiziona il logo in alto a sinistra */
   margin-top: 3rem;
-  margin-left: 10rem;
+  margin-left: 8rem;
 }
 
 #logo img {
@@ -35,27 +37,29 @@ main {
 }
 
 /* Posiziona l'H1/span/p/ul ed li con l'utilizzo del margin */
-header h1 {
-  font-size: 5em;
-  margin: 6rem 76rem 2rem 10rem;
+h1 {
+  font-size: 4em;
+  margin: 4rem 60rem 2rem 0;
 }
-header span {
+main h1 > span {
   font-weight: bold;
 }
 main h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   color: #c2128d;
   margin: 0 0 1rem 0;
 }
 main p {
   margin: 0 67rem 1rem 0;
+  font-size: 1em;
 }
 form ul {
-  margin: 3rem 0 6rem 2rem;
+  margin: 3rem 0 3rem 2rem;
 }
 li {
   margin: 0.8rem 0 0 0;
+  font-size: 1em;
 }
 ul span {
   font-weight: bold;
