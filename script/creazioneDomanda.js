@@ -96,7 +96,37 @@ const questions = [
   },
 ];
 
-// Mescola un array
+const maxQuestions = 10; // numero massimo di domande
+let score = 0; // punteggio
+let currentIndex = 0; // indice corrente
+const usedIndices = []; // array in cui finiscono domande usate
+
+const questionEl = document.getElementById("h2-domanda");
+// targhetto il div dove va la domanda
+const answersEl = document.getElementById("risposte");
+// targhetto il div dove vanno le risposte
+const counterEl = document.querySelector(".question-counter p");
+// targhetto il p del contatore delle domande
+
+const getRandomQuestion = () => {
+  // funzione per
+  // generare domande casuali
+  let i; // variabile indice
+  // uso un ciclo do while
+  do {
+    i = Math.floor(Math.random() * questions.length);
+    // il nostro do farà si che il nostro indice sarà
+    // un numero compreso tra la lunghezza dell'array di domande
+  } while (usedIndices.includes(i));
+  // la condizione di while controlla se il nostro array
+  // di domande già usate include quell'indice generato dal do
+  usedIndices.push(i);
+  // fino a quando il while non sarà true ovvero fino a quando
+  // l'indice non sarà presente in usedIndices
+  return questions[i];
+  // ci ritornerà la domanda con l'indice generato randomicamente
+};
+
 const mischiaArray = (array) => {
   for (let i = 0; i < array.length - 1; i++) {
     const b = i + Math.floor(Math.random() * (array.length - i));
@@ -104,67 +134,88 @@ const mischiaArray = (array) => {
   }
   return array;
 };
+// metodo Fisher-Yates che mescola gli array
+// ci serve come funzione da invocare
+// in seguito per mescolare le risposte
 
-// Salva le risposte dell'utente
-let userAnswers = [];
-let currentQuestionIndex = 0;
+const showedQuestion = () => {
+  // funzione che controlla se abbiamo già mostrato
+  // tutte le domande
+  if (currentIndex >= maxQuestions) {
+    // se l'indice corrente
+    // è maggiore o uguale alla variabile di domande
+    // massime che abbiamo impostato
+    // vuol dire che il nostro quiz è finito
+    localStorage.setItem("score", score);
+    // con localStorage.setItem salviamo il nostro score
+    // nel local storage del browser
+    window.location.href = "results.html";
+    // window.location.href ci reinderizza all'html dei risultati
+    return;
+    // il return ci serve per non reiterare altre domande
+    // e far fermare l'esecuzione del codice in maniera definitiva
+    // una volta finite le domande
+  }
 
-// Seleziona risposta e aggiorna visivamente
-const selezionaRisposta = (answer, selectedDiv) => {
-  document.querySelectorAll(".answer-option").forEach((div) => {
-    div.classList.remove("selected");
+  const q = getRandomQuestion();
+  // invoco la funzione assegnando il suo valore alla variabile q
+  questionEl.innerHTML = `<h2>${q.question}</h2>`;
+  // l'html del nostro div in questo modo e con i template literals
+  // sarà l'h2 in cui l'indice della funzione
+  // prenderà una domanda casuale e stamperà quella q.question
+  // fa riferimento alla proprietà dell'array iniziale
+  answersEl.innerHTML = "";
+  // ogni giro le nostre risposte saranno svuotate
+
+  let allAnswers;
+  // variabile per tutte le risposte
+  if (
+    q.type === "boolean" && // se il tipo è booleano
+    q.correct_answer.match(/true|false/i) && // controlla se
+    // la risposta corretta contiene true o false la i fa si che non
+    // si tenga conto di minuscole o maiuscole
+    q.incorrect_answers.length === 1
+    // controlla che la lunghezza delle risposte scorrette
+    // sia 1
+  ) {
+    allAnswers = ["True", "False"];
+    // voglio fare in modo che le mie risposte booleane
+    // non siano mescolate, ma che il mio true sia sempre all'inizio
+  } else {
+    allAnswers = mischiaArray([q.correct_answer, ...q.incorrect_answers]);
+    // se non è booleano mischio gli array con la funzione creata
+    // appositamente. Separo gli array di risposte corrette e
+    // scorrette con lo spread operator (...)
+  }
+  allAnswers.forEach((answer) => {
+    // ciclo tutte le risposte con forEach.
+    const btn = document.createElement("button");
+    // creo l'elemento bottone dove andranno le risposte
+    btn.textContent = answer;
+    // il bottone avrà come testo la risposta ciclata
+    btn.className = "answer-btn";
+    // assegno una classe per modifcarlo in CSS in seguito
+    btn.addEventListener("click", () => {
+      // aggiungo evento di
+      // ascolto al bottone
+      if (answer === q.correct_answer) score++;
+      // se la risposta è corretta lo score aumenta di 1
+      currentIndex++;
+      // e l'indice corrente pure
+      showedQuestion();
+      // l'invocazione della funzione permette di fare apparire
+      // la domanda successiva fino al raggiungimento di maxQuestion
+    });
+
+    answersEl.appendChild(btn);
+    // appendo bottone al suo padre dichiarato all'inizio
   });
 
-  selectedDiv.classList.add("selected");
-  selectedDiv.querySelector('input[type="radio"]').checked = true;
-
-  userAnswers[currentQuestionIndex] = answer;
+  counterEl.innerHTML = `QUESTION ${
+    currentIndex + 1
+    // ogni giro di domanda il nostro contatore aumenterà di 1
+  } <span>/ ${maxQuestions}</span>`;
 };
 
-// Seleziona e prepara i contenitori
-const divH2 = document.getElementById("h2-domanda");
-const h2 = document.createElement("h2");
-divH2.appendChild(h2);
-
-const risposteDiv = document.getElementById("risposte");
-risposteDiv.innerHTML = "";
-
-// Funzione per creare una domanda
-const creaDomanda = (index) => {
-  const domanda = questions[index];
-  h2.innerHTML = domanda.question;
-  risposteDiv.innerHTML = "";
-
-  const tutteLeRispostePossibili = [
-    domanda.correct_answer,
-    ...domanda.incorrect_answers,
-  ];
-
-  const risposteMischiate = mischiaArray([...tutteLeRispostePossibili]);
-
-  risposteMischiate.forEach((answer, answerIndex) => {
-    const singolaRispostaDiv = document.createElement("div");
-    singolaRispostaDiv.className = "answer-option";
-
-    const selezionata = userAnswers[currentQuestionIndex] === answer;
-    if (selezionata) {
-      singolaRispostaDiv.classList.add("selected");
-    }
-
-    singolaRispostaDiv.innerHTML = `
-      <input type="radio" name="answer" value="${answer}" id="answer-${answerIndex}" ${
-      selezionata ? "checked" : ""
-    }>
-      <label for="answer-${answerIndex}">${answer}</label>
-    `;
-
-    singolaRispostaDiv.addEventListener("click", () =>
-      selezionaRisposta(answer, singolaRispostaDiv)
-    );
-
-    risposteDiv.appendChild(singolaRispostaDiv);
-  });
-};
-
-// Avvio della prima domanda
-creaDomanda(currentQuestionIndex);
+window.onload = showedQuestion;
+// al caricamento della pagina verrà lanciata la prima domanda
