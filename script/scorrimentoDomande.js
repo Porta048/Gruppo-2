@@ -1,26 +1,38 @@
-// Funzione per aggiornare il contatore delle domande
+/**
+ * FUNZIONE: aggiornaContatore
+ * SCOPO: Aggiorna il testo del contatore delle domande (es. "QUESTION 2 / 10").
+ * - Prende il numero della domanda attuale da `currentQuestionIndex`.
+ * - Aggiorna l'HTML per mostrare il progresso.
+ */
 const aggiornaContatore = () => {
   const questionCounter = document.querySelector('.question-counter p');
   if (questionCounter) {
+    // Nota: Aggiungiamo +1 perché gli array partono da 0
     questionCounter.innerHTML = `QUESTION ${currentQuestionIndex + 1} <span>/ 10</span>`;
   }
 };
 
-// Funzione per avanzare alla domanda successiva
+/**
+ * FUNZIONE: procediAllaProssimaDomanda
+ * SCOPO: Gestisce il passaggio da una domanda all'altra.
+ * - Aumenta l'indice per passare alla domanda successiva.
+ * - Se ci sono ancora domande:
+ *   - Mostra la nuova domanda.
+ *   - Aggiorna il contatore.
+ *   - Fa ripartire il timer.
+ * - Se le domande sono finite:
+ *   - Reindirizza alla pagina dei risultati.
+ */
 const procediAllaProssimaDomanda = () => {
-    // Incrementa l'indice della domanda corrente
     currentQuestionIndex++;
   
-    // Controlla se ci sono altre domande
+    // Controlla se ci sono ancora domande nell'array `questions`
     if (currentQuestionIndex < questions.length) {
-      // Se sì, crea la domanda successiva
-      creaDomanda(currentQuestionIndex);
-      // Aggiorna il contatore delle domande
-      aggiornaContatore();
-      // E riavvia il timer
-      startTimer();
+      creaDomanda(currentQuestionIndex); // Mostra la domanda successiva
+      aggiornaContatore();               // Aggiorna il contatore (es. "3 / 10")
+      startTimer();                      // Fa ripartire il timer da 60 secondi
     } else {
-      // Se le domande sono terminate, reindirizza alla pagina dei risultati
+      // Se il quiz è finito, va alla pagina dei risultati
       console.log("Quiz terminato! Tutte le 10 domande completate.");
       window.location.href = "results.html";
     }
