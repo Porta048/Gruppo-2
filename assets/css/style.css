@@ -1,16 +1,13 @@
 /* 
-  ===================================
-  EPICODE QUIZ - STILE PRINCIPALE
-  ===================================
-  Questo file contiene tutti gli stili per la pagina del quiz
+  =================================
+  FOGLIO DI STILE - QUIZ EPICODE
+  =================================
 */
 
 /* 
-  IMPOSTAZIONI BASE DEL BODY
-  - Sfondo con immagine
-  - Font principale Inter
-  - Layout flessibile verticale
-  - Colore testo bianco per contrasto
+  IMPOSTAZIONI GENERALI DELLA PAGINA
+  - Sfondo a tutta pagina
+  - Allineamento verticale del contenuto
 */
 body {
   background-image: url(../image/bg.jpg);
@@ -20,15 +17,15 @@ body {
   color: #fff;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  position: relative;
+  height: 100vh;
+  display: table;
+  width: 100%;
 }
 
 /* 
-  HEADER - Contiene logo e timer
-  - Logo posizionato a sinistra
-  - Timer posizionato a destra
-  - Uso posizionamento assoluto per controllo preciso
+  HEADER (PARTE SUPERIORE)
+  Contiene il logo e il timer.
+  Usa 'position: absolute' per rimanere fisso in alto.
 */
 header {
   position: absolute;
@@ -40,7 +37,8 @@ header {
 }
 
 /* 
-  LOGO EPICODE - Posizione alto sinistra
+  LOGO EPICODE
+  Posizionato in alto a sinistra.
 */
 #logo {
   position: absolute;
@@ -54,7 +52,8 @@ header {
 }
 
 /* 
-  TIMER CIRCOLARE - Posizione alto destra
+  TIMER CIRCOLARE
+  Posizionato in alto a destra.
 */
 #timer {
   position: absolute;
@@ -62,98 +61,97 @@ header {
   top: 0;
 }
 
-/* Contenitore del cerchio del timer */
-#timer-circle {
-  position: relative;
-  width: 140px;
-  height: 140px;
-}
-
 /* 
-  TESTO DEL TIMER - Sovrapposto al grafico circolare
-  - Centrato perfettamente nel cerchio
-  - Font Montserrat per eleganza
-  - Layout verticale con Flexbox
+  TESTO DENTRO IL TIMER (Numero e scritte)
+  Ogni elemento è posizionato in modo assoluto
+  per un centramento perfetto.
 */
 #timerText {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   font-family: "Montserrat", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  line-height: 1.2;
 }
 
-/* Etichette "SECONDS" e "REMAINING" */
+/* NUMERO DEL TIMER (es. "50") */
+#timerNumber {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Tecnica per centrare */
+  font-size: 1.8em;
+  font-weight: bold;
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+
+/* SCRITTE "SECONDS" E "REMAINING" */
 #timerText .timer-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); /* Centra orizzontalmente */
   font-size: 0.6em;
   letter-spacing: 2px;
   font-weight: 400;
-}
-
-/* Numero del countdown */
-#timerNumber {
-  font-size: 1.8em;
-  font-weight: bold;
-  margin: 0.1em 0;
-}
-
-/* 
-  CONTENUTO PRINCIPALE DEL QUIZ
-  - Centrato verticalmente e orizzontalmente
-  - Margine superiore per non sovrapporsi all'header
-*/
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding-top: 120px; /* Spazio per header */
-  padding-bottom: 2em;
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
   text-align: center;
 }
 
-/* 
-  CONTENITORE DELLA DOMANDA
-*/
-#h2-domanda h2 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.8em;
-  font-weight: 700;
-  margin-bottom: 2em;
-  line-height: 1.3;
+/* "SECONDS" (posizionata in alto) */
+#timerText .timer-label:first-child {
+  top: 35px;
+}
+
+/* "REMAINING" (posizionata in basso) */
+#timerText .timer-label:last-child {
+  bottom: 35px;
 }
 
 /* 
-  CONTENITORE DELLE RISPOSTE
-  - Griglia a 2 colonne per layout ordinato
-  - Spazio uniforme tra i bottoni
+  CONTENITORE PRINCIPALE (Domanda, risposte, etc.)
+  Allineato al centro dello schermo.
+*/
+main {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  padding-top: 120px;
+  padding-bottom: 2em;
+}
+
+/* TESTO DELLA DOMANDA */
+#h2-domanda h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin-bottom: 2em;
+  line-height: 1.4;
+}
+
+/* 
+  AREA DELLE RISPOSTE
+  Griglia a 2 colonne, più stretta della domanda.
 */
 #risposte {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1em;
-  width: 100%;
-  margin-bottom: 2em;
+  width: 80%;
+  margin: 0 auto 2em;
 }
 
 /* 
-  SINGOLA OPZIONE DI RISPOSTA
-  - Sfondo semi-trasparente
-  - Bordo arrotondato per design moderno
-  - Effetti hover e selezione
+  STILE DEI SINGOLI BOTTONI DI RISPOSTA
 */
 .answer-option {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid transparent;
+  background-color: rgba(1, 1, 23, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 1.2em;
   border-radius: 25px;
   cursor: pointer;
@@ -162,28 +160,27 @@ main {
   font-weight: 400;
 }
 
-/* Effetto hover - cambia colore al passaggio del mouse */
+/* Stile quando passi il mouse sopra una risposta */
 .answer-option:hover {
   background-color: #d20094;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: #d20094;
 }
 
-/* Stato selezionato - evidenzia la risposta scelta */
+/* Stile della risposta selezionata */
 .answer-option.selected {
   background-color: #d20094;
-  border-color: #00ffff;
+  border-color: #d20094;
 }
 
-/* Nasconde i radio button nativi del browser */
+/* Nasconde i pallini dei radio button */
 .answer-option input[type="radio"] {
   display: none;
 }
 
 /* 
-  PULSANTE AVANTI
-  - Appare quando l'utente seleziona una risposta
-  - Design moderno con colori del brand
-  - Inizialmente nascosto
+  PULSANTE "AVANTI"
+  Appare dopo aver scelto una risposta.
+  Inizialmente è nascosto.
 */
 #next-button {
   background-color: #d20094;
@@ -197,23 +194,20 @@ main {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 1.5em 0;
-  display: none; /* Inizialmente nascosto */
+  margin: 1.5em auto;
+  display: none; /* Nascosto di base */
+  width: 200px;
 }
 
-/* Effetto hover per il pulsante */
+/* Stile quando passi il mouse sul pulsante "Avanti" */
 #next-button:hover {
   background-color: #00ffff;
   color: #000;
   border-color: #00ffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
 }
 
 /* 
-  CONTATORE DELLE DOMANDE
-  - Mostra il progresso (es: "QUESTION 1 / 10")
-  - Font Montserrat per coerenza con il timer
+  CONTATORE DOMANDE (es. "QUESTION 1 / 10")
 */
 .question-counter {
   font-family: "Montserrat", sans-serif;
@@ -222,7 +216,7 @@ main {
   margin-top: 1em;
 }
 
-/* Evidenzia il numero totale delle domande */
+/* Stile del numero totale (es. "/ 10") */
 .question-counter span {
   color: #d20094;
   font-weight: bold;
@@ -248,3 +242,4 @@ main {
 .button-more-proceed {
   /* Stili da definire se necessario */
 }
+
