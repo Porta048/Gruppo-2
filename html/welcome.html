@@ -3,44 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Welcome to your exam</title>
+    <link rel="stylesheet" href="../assets/css/welcome.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <header>
-      <div>
-        <!--Space for Epicode Logo -->
-      </div>
-      <h1>Welcome to <span>your exam</span></h1>
-    </header>
-    <main>
-      <h2>Instructions</h2>
-      <p>
-        We don't expect most engineers to know the answers to all of these
-        quiestions , so don't worry if you're unsure of a few of them .
-      </p>
+  <body class="welcome-page">
+    <div class="logo-container">
+      <img src="../assets/image/epicode_logo.png" alt="EPICODE Logo" />
+    </div>
 
-      <div>
-        <form>
+    <div class="welcome-container">
+      <header>
+        <h1>Welcome to <br /><span>your exam</span></h1>
+      </header>
+      <main>
+        <div class="instructions">
+          <h2>Instructions</h2>
+          <p>
+            We don't expect most engineers to know the answers to all of these
+            questions, so don't worry if you're unsure of a few of them.
+          </p>
           <ul>
             <li>
-              Each question is <span>timed</span> and can only be
-              <span>answered once.</span>
+              Each question is <strong>timed</strong> and can only be
+              <strong>answered once</strong>.
             </li>
             <li>
-              Changin browser tab or opening other windows will
-              <span>invalidate the question.</span>
+              Changing browser tab or opening other windows will
+              <strong>invalidate the question</strong>.
             </li>
-            <li>this exam will take approx. <span>0-5 minutes.</span></li>
+            <li>This exam will take approx. <strong>0-5 minutes</strong>.</li>
           </ul>
-          <input type="checkbox" />
-          <label for=""
-            >i promise to answer myself without help from anyone
-          </label>
-
-          <button>Proceed</button>
-        </form>
-      </div>
-    </main>
-    <footer></footer>
+        </div>
+        <div class="proceed-section">
+          <div class="checkbox-container">
+            <input type="checkbox" id="promise" />
+            <label for="promise"
+              >I promise to answer myself without help from anyone</label
+            >
+          </div>
+          <a href="benchmark.html" class="proceed-button">PROCEED</a>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
+
