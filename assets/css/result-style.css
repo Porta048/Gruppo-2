@@ -87,12 +87,14 @@ header img {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   text-align: left;
+  margin-bottom: 0.4rem;
 }
 .wrong-column h2 {
   font-size: 3rem;
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   text-align: right;
+  margin-bottom: 0.4rem;
 }
 
 .wrong-column h2 span {
