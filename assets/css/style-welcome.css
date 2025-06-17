@@ -1,94 +1,326 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-body {
-  /* Imposta l'immagine di sfondo, la centra e la fissa durante lo scroll */
+/**
+ * CSS per la pagina di benvenuto (welcome.html).
+ * L'obiettivo è replicare fedelmente il design fornito.
+ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  /* Sfondo con immagine, centrata e fissata per coprire lo schermo */
   background: url('../image/bg.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
-  /* Assicura che il body copra tutta l'altezza della finestra */
   min-height: 100vh;
   margin: 0;
-
-  /* Imposta i font di base e il colore del testo */
   font-family: 'Inter', Arial, sans-serif;
   color: white;
-  text-align: start;
-  max-width: 1440px;
-  max-height: 800px;
-}
-
-/* Fa in modo che il main occupi lo spazio rimanente */
-main {
-  margin: 3rem 0rem 2rem 8rem;
-  width: 100%;
-  font-size: 1.5em;
 }
 #logo {
   /* Posiziona il logo in alto a sinistra */
-  margin-top: 3rem;
-  margin-left: 8rem;
+  margin: 4rem 0rem 2rem 12rem;
 }
 
 #logo img {
   height: 3rem;
 }
+/**
+ * Il container 'main' serve a centrare il contenuto
+ * su schermi molto larghi, evitando che si espanda troppo.
+ */
+main {
+  margin: 0rem 0rem 2rem 12rem;
+}
 
-/* Posiziona l'H1/span/p/ul ed li con l'utilizzo del margin */
+/* Stili per i titoli e i testi */
 h1 {
-  font-size: 4em;
-  margin: 4rem 60rem 2rem 0;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 0.95;
+  margin: 4rem 70rem 0 0rem;
 }
-main h1 > span {
-  font-weight: bold;
+
+h1 span {
+  font-weight: 700;
 }
-main h2 {
-  font-size: 1.5em;
-  font-weight: bold;
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #c2128d;
-  margin: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
 }
-main p {
-  margin: 0 67rem 1rem 0;
-  font-size: 1em;
+
+p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  max-width: 550px;
+  font-weight: 400;
+  opacity: 0.9;
 }
-form ul {
-  margin: 3rem 0 3rem 2rem;
+
+/* Il form usa tutta la larghezza disponibile nel suo contenitore */
+form {
+  width: 100%;
 }
-li {
-  margin: 0.8rem 0 0 0;
-  font-size: 1em;
+
+/* Stili per la lista di istruzioni */
+ul {
+  list-style: none; /* Rimuove i pallini di default */
+  margin-bottom: 5rem;
+  padding-left: 0;
 }
 ul span {
   font-weight: bold;
 }
-form input {
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+li {
+  font-size: 1rem;
+  line-height: 1.6;
+  position: relative; /* Necessario per il pallino personalizzato */
+  padding-left: 20px;
+  font-weight: 400;
+  opacity: 0.9;
 }
-#checkbox {
-  top: 0;
+
+/* Crea un pallino bianco personalizzato per ogni 'li' */
+li::before {
+  content: '•';
+  position: absolute;
   left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #fff;
-  border: 2px solid black;
-  border-radius: 4px;
+  top: 0;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
-/* Posizione bottone a sinistra in basso, usando il margin, e successivamente creazione del background con effetto "glow" */
-button {
-  margin: 0 0 0 30rem;
-  width: 15rem;
-  height: 4rem;
-  font-weight: bold;
-  font-size: 1em;
-  background-color: #00ffff;
-  border: none;
-  box-shadow: 0 0 15px 5px #00ffff, 0 0 30px 10px #00ffff;
-  color: #000000;
+
+li strong {
+  font-weight: 700;
+}
+
+/**
+ * Allinea checkbox e pulsante sulla stessa riga, distribuendoli:
+ * la checkbox a sinistra e il pulsante a destra.
+ */
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Allinea la checkbox con la sua etichetta */
+.form-footer > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 12px;
+  flex-shrink: 0; /* Evita che si rimpicciolisca */
+}
+
+/* Stili per la checkbox personalizzata */
+#checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: transparent;
   cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+#checkbox:checked {
+  border-color: white;
+}
+
+/* Simbolo di spunta (✓) quando la checkbox è selezionata */
+#checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  color: #c2128d;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Stile dell'etichetta della checkbox */
+label {
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/**
+ * Stili del pulsante PROCEED, incluso l'effetto "glow".
+ * L'effetto è creato con tre livelli di box-shadow.
+ */
+button {
+  background: #00ffff;
+  color: #000;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 750;
+  letter-spacing: 1px;
+  cursor: pointer;
+  align-self: flex-start;
+
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5),
+    /* Glow interno */ 0 0 30px rgba(0, 255, 255, 0.3),
+    /* Glow medio */ 0 0 45px rgba(0, 255, 255, 0.1); /* Glow esterno */
+
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+/* Aumenta l'effetto glow al passaggio del mouse */
+button:hover:not(:disabled) {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4),
+    0 0 60px rgba(0, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Rende il pulsante semi-trasparente quando disabilitato */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Media Queries per schermi PC --- */
+
+/**
+ * Adatta il layout per schermi molto grandi (4K, etc.),
+ * aumentando le dimensioni e le spaziature.
+ */
+@media (min-width: 1920px) {
+  .content-wrapper {
+    margin-left: 8rem;
+    max-width: 1200px;
+  }
+
+  #logo {
+    left: 8rem;
+    top: 6rem;
+  }
+
+  #logo img {
+    height: 3.5rem;
+  }
+
+  h1 {
+    font-size: 6rem;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  ul {
+    margin-bottom: 3.5rem;
+  }
+
+  li {
+    font-size: 1.2rem;
+  }
+
+  label {
+    font-size: 1.2rem;
+  }
+
+  button {
+    padding: 1.4rem 4rem;
+    font-size: 1.2rem;
+    margin: 0 0 0 35rem;
+  }
+}
+
+/**
+ * Adattamenti per schermi Full HD.
+ */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .content-wrapper {
+    margin-left: 6rem;
+  }
+
+  #logo {
+    left: 6rem;
+    top: 5rem;
+  }
+
+  #logo img {
+    height: 3rem;
+  }
+
+  h1 {
+    font-size: 5.5rem;
+    margin-bottom: 4rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+  }
+
+  ul {
+    margin-bottom: 4rem;
+  }
+
+  li {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  label {
+    font-size: 1.1rem;
+  }
+
+  button {
+    padding: 1.2rem 3.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Stili per schermi HD */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  h1 {
+    font-size: 5rem;
+  }
+}
+
+/* Stili per laptop e schermi più piccoli */
+@media (max-width: 1199px) {
+  .content-wrapper {
+    margin-left: 4rem;
+    max-width: calc(100vw - 8rem);
+  }
+
+  #logo {
+    left: 4rem;
+  }
+
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
 }
