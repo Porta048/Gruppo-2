@@ -1,129 +1,87 @@
-/**
- * SCRIPT PER LA PAGINA DEI RISULTATI (results.html)
- * 
- * SCOPO:
- * 1. Recuperare il punteggio e il numero totale di domande dal localStorage.
- * 2. Calcolare le percentuali di risposte corrette e sbagliate.
- * 3. Aggiornare l'HTML per mostrare questi risultati all'utente.
- * 4. Creare e configurare un grafico a ciambella (usando Chart.js) per visualizzare i risultati.
- * 5. Mostrare un messaggio di superamento o fallimento del test in base al punteggio.
- */
-
-// L'evento 'DOMContentLoaded' assicura che lo script venga eseguito solo dopo che l'intera pagina HTML è stata caricata.
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // --- 1. RECUPERO DATI DAL LOCALSTORAGE ---
-
-  // Recuperiamo il valore di 'score' salvato nella pagina del quiz.
-  // `localStorage.getItem('score')` restituisce una stringa, quindi usiamo `parseInt` per convertirla in un numero intero.
-  // `|| 0` (OR logico) è una sicurezza: se 'score' non esiste nel localStorage (o è nullo), il valore di `score` sarà 0.
   const score = parseInt(localStorage.getItem("score"), 10) || 0;
-  
-  // Facciamo lo stesso per il numero totale di domande.
-  // Qui, la sicurezza `|| 1` evita una divisione per zero nei calcoli successivi se 'quiz' non fosse trovato.
+  // recupero lo score con localStorage.getItem e lo pongo in base
+  // decimale mettendo il 10 alla fine
   const total = parseInt(localStorage.getItem("quiz"), 10) || 1;
-  
-  // Calcoliamo il numero di risposte sbagliate semplicemente sottraendo lo score dal totale.
+  // recupero il totale con localStorage.getItem e lo pongo in base
+  // decimale mettendo il 10 alla fine
   const wrong = total - score;
-
-  // --- 2. CALCOLO PERCENTUALI ---
-
-  // Calcoliamo la percentuale di risposte corrette.
-  // `toFixed(1)` formatta il numero per avere una sola cifra decimale (es. 87.5).
+  // il valore dele domande errate saranno il nostro totale
   const correctPercentage = ((score / total) * 100).toFixed(1);
-
-  // Calcoliamo la percentuale di risposte sbagliate.
+  // la nostra percentuale di risposte corrette sarà lo score
+  // sul totale per 100, aggiungo il metodo toFixed(1) per arrotondare
+  // ad una cifra decimale
   const wrongPercentage = ((wrong / total) * 100).toFixed(1);
+  // la nostra percentuale di risposte scorrette sarà wrong,
+  // dichiarato prima,
+  // sul totale per 100, aggiungo il metodo toFixed(1) per arrotondare
+  // ad una cifra decimale
 
-  // --- 3. AGGIORNAMENTO CONTENUTO HTML ---
-
-  // Selezioniamo l'elemento H2 per la percentuale di risposte corrette.
   const correctPerc = document.getElementById("correct-percentage");
-  // Inseriamo il testo e la percentuale calcolata usando un template literal. `<br>` crea un a capo.
-  correctPerc.innerHTML = `Correct <br> ${correctPercentage}%`;
-  
-  // Selezioniamo il paragrafo per il dettaglio delle risposte corrette.
+  // targhetto h2
+  correctPerc.innerHTML = `Correct <br> <span>${correctPercentage}%</span>`;
+  // gli assegno il valore
   const correctValue = document.getElementById("correct-value");
-  // Inseriamo il numero di risposte corrette sul totale (es. "8/10 questions").
+  // targhetto p
   correctValue.innerText = `${score}/${total} questions`;
-  
-  // Selezioniamo l'elemento H2 per la percentuale di risposte sbagliate.
+  // gli assegno il valore
   const wrongPerc = document.getElementById("wrong-percentage");
-  wrongPerc.innerHTML = `Wrong <br> ${wrongPercentage}%`;
-
-  // Selezioniamo il paragrafo per il dettaglio delle risposte sbagliate.
+  // targhetto h2
+  wrongPerc.innerHTML = `Wrong <br> <span>${wrongPercentage}%</span>`;
+  // gli assegno il valore
   const wrongValue = document.getElementById("wrong-value");
+  // targhetto p
   wrongValue.innerText = `${wrong}/${total} questions`;
 
-  // --- 4. CONFIGURAZIONE E CREAZIONE GRAFICO (CHART.JS) ---
+  // --- Logica per il messaggio di superamento/fallimento esame ---
+  const examState = document.getElementById("exam");
+  if (correctPercentage >= 60) {
+    examState.innerHTML = `
+        <h2>Congratulations! <br> <span>You passed the exam.</span></h2>
+        <p>We'll send you the certificate <br> in few minutes. <br> Check your email (including <br> promotions / spam folder)</p>
+      `;
+  } else {
+    examState.innerHTML = `
+        <h2>Unfortunately, <br> <span>you did not pass.</span></h2>
+        <p>Try again to improve <br> your score!</p>
+      `;
+  }
+  // --- LOGICA DELLA CIAMBELLA (CHART.JS) ---
 
-  // Definiamo i dati che Chart.js userà per disegnare il grafico.
+  // 1. Dati per il grafico (risposte sbagliate e giuste)
   const chartData = {
-    labels: ["Wrong", "Correct"], // Etichette per le due sezioni del grafico
+    labels: ["Wrong", "Correct"],
     datasets: [
       {
-        // I valori numerici che determinano la grandezza di ogni fetta della ciambella.
-        data: [wrong, score], 
-        // I colori delle due sezioni (rispettivamente per "Wrong" e "Correct").
-        backgroundColor: ["#D20094", "#00FFFF"],
-        // Impostiamo a 0 per rimuovere qualsiasi bordo tra le fette, per un look più pulito.
-        borderWidth: 0, 
+        data: [wrong, score], // Dati dinamici
+        backgroundColor: ["#D20094", "#00FFFF"], // Colori per sbagliate e giuste
+        borderWidth: 0, // Nessun bordo per un look più pulito
+        hoverOffset: 20, // Effetto al passaggio del mouse
       },
     ],
   };
 
-  // Definiamo le opzioni di configurazione per personalizzare l'aspetto e il comportamento del grafico.
+  // 2. Configurazione del grafico
   const chartConfig = {
-    type: "doughnut", // Specifichiamo che vogliamo un grafico a ciambella.
-    data: chartData,  // Colleghiamo i dati definiti sopra.
+    type: "doughnut", // Tipo di grafico
+    data: chartData,
     options: {
-      // Configurazione delle animazioni.
-      animation: {
-        // La durata dell'animazione di riempimento è legata al punteggio:
-        // un punteggio più alto produce un'animazione più lunga e gratificante.
-        duration: correctPercentage * 20, 
-      },
-      // Controlla la dimensione del "buco" centrale. "70%" significa che l'anello occuperà il 30% dello spazio.
-      cutout: "70%", 
-      // I 'plugins' sono estensioni che aggiungono funzionalità o modificano quelle esistenti.
+      cutout: "70%", // Spessore della ciambella
       plugins: {
-        // Configurazione della legenda (le etichette colorate che descrivono i dati).
         legend: {
-          display: false, // La nascondiamo perché i nostri dati sono già chiari.
+          display: false, // Nasconde la legenda (etichette "Wrong", "Correct")
         },
-        // Configurazione del tooltip (il riquadro che appare al passaggio del mouse).
         tooltip: {
-          enabled: true, // Lo manteniamo attivo per mostrare i dettagli al passaggio del mouse.
+          enabled: true, // Mostra i dettagli al passaggio del mouse
         },
       },
     },
   };
 
-  // Troviamo l'elemento <canvas> nel nostro HTML.
+  // 3. Creazione del grafico
+  // Prende l'elemento <canvas> dall'HTML e ci disegna sopra il grafico
   const doughnutCanvas = document.querySelector(".doughnut");
-  // Controlliamo che l'elemento esista prima di provare a disegnarci sopra.
   if (doughnutCanvas) {
-    // Creiamo una nuova istanza di Chart, passandogli il canvas e la configurazione.
-    // Questo comando disegna effettivamente il grafico sulla pagina.
     new Chart(doughnutCanvas, chartConfig);
-  }
-
-  // --- 5. MESSAGGIO DI STATO ESAME ---
-
-  // Selezioniamo il div al centro della ciambella dove mostreremo il messaggio finale.
-  const examState = document.getElementById("exam");
-  // Controlliamo se la percentuale di risposte corrette è uguale o superiore a 60.
-  if (correctPercentage >= 60) {
-    // Se sì, l'utente ha superato l'esame. Inseriamo il messaggio di congratulazioni.
-    examState.innerHTML = `
-      <h2>Congratulations! <br> <span>You passed the exam.</span></h2>
-      <p>We'll send you the certificate in few minutes. Check your email (including promotions / spam folder)</p>
-    `;
-  } else {
-    // Altrimenti, l'utente non ha superato l'esame. Inseriamo il messaggio di incoraggiamento.
-    examState.innerHTML = `
-      <h2>Unfortunately, <br> <span>you did not pass.</span></h2>
-      <p>Try again to improve your score!</p>
-    `;
   }
 });
