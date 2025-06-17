@@ -11,12 +11,10 @@
     <!-- FONT DI GOOGLE (Montserrat per il timer, Inter per il testo) -->
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
 
     <title>Epicode quiz</title>
 
@@ -24,39 +22,73 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <!-- LOGO EPicode -->
-    <div id="logo">
-      <img src="../assets/image/epicode_logo.png" alt="EPICODE" />
-    </div>
+    <!-- 
+      HEADER: Contiene logo (sinistra) e timer (destra)
+      Posizionato nella parte superiore della pagina
+    -->
+    <header>
+      <!-- LOGO EPICODE - Posizione: Alto sinistra -->
+      <div id="logo">
+        <img src="../assets/image/epicode_logo.png" alt="EPICODE" />
+      </div>
 
-    <!-- TIMER CIRCOLARE -->
-    <div id="timer">
-      <div id="timer-circle">
-        <canvas id="timerChart" width="140" height="140"></canvas>
-        <div id="timerText">
-          <span class="timer-label">SECONDS</span>
-          <span id="timerNumber">60</span>
-          <span class="timer-label">REMAINING</span>
+      <!-- TIMER CIRCOLARE - Posizione: Alto destra -->
+      <div id="timer">
+        <!-- Contenitore del cerchio del timer -->
+        <div id="timer-circle">
+          <!-- Canvas per il grafico circolare (Chart.js) -->
+          <canvas id="timerChart" width="140" height="140"></canvas>
+          <!-- Testo sovrapposto al timer -->
+          <div id="timerText">
+            <span class="timer-label">SECONDS</span>
+            <span id="timerNumber">60</span>
+            <span class="timer-label">REMAINING</span>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
 
-    <!-- CONTENITORE PRINCIPALE DEL QUIZ -->
+    <!-- 
+      CONTENITORE PRINCIPALE DEL QUIZ
+      Contiene domanda, risposte e contatore
+    -->
     <main>
-      <!-- DOMANDA -->
-      <div id="h2-domanda"></div>
+      <!-- CONTENITORE DELLA DOMANDA - Viene popolato da JavaScript -->
+      <div id="h2-domanda">
+        <!-- La domanda viene inserita qui dal file creazioneDomanda.js -->
+      </div>
 
-      <!-- BOTTONI DELLE RISPOSTE -->
-      <div id="risposte"></div>
+      <!-- CONTENITORE DELLE OPZIONI DI RISPOSTA - Viene popolato da JavaScript -->
+      <div id="risposte">
+        <!-- Le opzioni di risposta vengono inserite qui dal file creazioneDomanda.js -->
+      </div>
 
-      <!-- CONTATORE DELLE DOMANDE -->
+      <!-- PULSANTE AVANTI - Appare quando l'utente seleziona una risposta -->
+      <button id="next-button" onclick="prossimaAnswerOption()">AVANTI</button>
+
+      <!-- CONTATORE DELLE DOMANDE - Mostra progresso (es: "QUESTION 1 / 10") -->
       <div class="question-counter">
         <p>QUESTION 1 <span>/ 10</span></p>
       </div>
     </main>
 
-    <!-- SCRIPT DEL TIMER -->
+    <!-- 
+      SCRIPT PER IL REDIRECT AUTOMATICO
+      Questa variabile definisce la pagina successiva quando il timer scade
+    -->
+    <script>
+      // Non più necessario con il sistema intelligente a singola pagina
+      // var nextPage = "feedback.html";
+    </script>
+
+    <!-- SCRIPT DEL TIMER - Gestisce il countdown e il grafico circolare -->
     <script src="../script/timer.js"></script>
+    
+    <!-- SCRIPT PER LA CREAZIONE DELLA DOMANDA - Genera dinamicamente domanda e risposte -->
     <script src="../script/creazioneDomanda.js"></script>
+    
+    <!-- SCRIPT PER LO SCORRIMENTO DELLE DOMANDE - Sistema intelligente a singola pagina -->
+    <script src="../script/scorrimentoDomande.js"></script>
   </body>
 </html>
+
