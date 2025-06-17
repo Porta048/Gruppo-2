@@ -18,3 +18,11 @@ icons.forEach((icon, index) => {
 });
 //invoco la funzione
 attivaStelle(range.value);
+
+//bottone goToEpicode
+const btn2 = document.getElementById("goToEpicode");
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  window.location.href = "https://www.epicode.com/it/";
+});
