@@ -32,16 +32,46 @@
             </li>
             <li>this exam will take approx. <span>0-5 minutes.</span></li>
           </ul>
-          <input type="checkbox" />
-          <label for=""
+          <input id="checkbox" type="checkbox" />
+          <label for="checkbox"
             >i promise to answer myself without help from anyone
           </label>
 
-          <button>Proceed</button>
+          <button id="proceedBtn" type="button" disabled>Proceed</button>
         </form>
       </div>
     </main>
     <footer></footer>
+
+    <script>
+      /**
+       * Logica per il pulsante "PROCEED"
+       *
+       * 1. Il pulsante è disabilitato di default.
+       * 2. Si abilita solo se la checkbox è spuntata.
+       * 3. Al click (se abilitato), porta alla pagina 'benchmark.html'.
+       */
+
+      // Prendo gli elementi dalla pagina
+      const checkbox = document.getElementById('checkbox');
+      const proceedButton = document.getElementById('proceedBtn');
+
+      // Aggiungo un "ascoltatore" che si attiva ogni volta che la checkbox cambia
+      checkbox.addEventListener('change', function () {
+        // Se la checkbox è spuntata (this.checked è true),
+        // la proprietà 'disabled' del pulsante diventa false (quindi il pulsante si abilita).
+        // Se non è spuntata, 'disabled' diventa true.
+        proceedButton.disabled = !this.checked;
+      });
+
+      // Aggiungo un "ascoltatore" per il click sul pulsante
+      proceedButton.addEventListener('click', function () {
+        // Come sicurezza, controllo di nuovo se la checkbox è spuntata
+        // prima di cambiare pagina.
+        if (checkbox.checked) {
+          window.location.href = 'benchmark.html';
+        }
+      });
+    </script>
   </body>
 </html>
-
