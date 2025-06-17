@@ -1,6 +1,6 @@
 // al click del bottone benchmark.html devo GENERARE() una domanda e ASSEGNARE() un risultato ad una variabile che sarà lo score
 //ASSEGNARE() = la funzione che stava scrivendo amedeo con l if. assegna se corretta un punteggio s enon corretta uno 0
-//GENERARE() = genero indice con getRnadom(), le stesse domande nn devono ricapitare. ergo i risultati iindice usciti non devono ripetersi IF. creo h2, creo risposte, submitto form per ASSEGNARE() e far nuovamente GENERARE() fino a i <10 (perchè dieci sono le domande)
+//GENERARE() = genero indice con getRandom(), le stesse domande nn devono ricapitare. ergo i risultati indice usciti non devono ripetersi IF. creo h2, creo risposte, submitto form per ASSEGNARE() e far nuovamente GENERARE() fino a i <10 (perchè dieci sono le domande)
 const questions = [
   {
     type: "multiple",
@@ -108,7 +108,7 @@ const mischiaArray = (array) => {
 // Salva le risposte dell'utente
 let userAnswers = [];
 let currentQuestionIndex = 0;
-let score = 0;
+let score = 0; // Punteggio iniziale. Viene incrementato per ogni risposta corretta.
 
 // Seleziona risposta e aggiorna visualmente
 const selezionaRisposta = (answer, selectedDiv) => {
@@ -127,20 +127,24 @@ const selezionaRisposta = (answer, selectedDiv) => {
     nextButton.style.display = "block";
   }
 };
-const verificaRispostaCorrente = () => {
-  const domanda = questions[currentQuestionIndex];
-  const rispostaUtente = userAnswers[currentQuestionIndex];
-
-  if (rispostaUtente === domanda.correct_answer) {
-    score++;
-  }
-};
 
 // Funzione per gestire il click del pulsante "Avanti"
 const prossimaAnswerOption = () => {
-  // verifico se la risposta corrente è corretta
-  // con la funzione precedentemente creata
-  verificaRispostaCorrente();
+  // --- LOGICA DI CONTROLLO PUNTEGGIO ---
+  // Prima di passare alla domanda successiva, controlliamo se la risposta data è corretta.
+
+  const domandaCorrente = questions[currentQuestionIndex]; // L'oggetto della domanda attuale
+  const rispostaUtente = userAnswers[currentQuestionIndex]; // La stringa della risposta scelta dall'utente
+
+  // Confrontiamo la risposta dell'utente con la risposta corretta per la domanda attuale.
+  if (rispostaUtente === domandaCorrente.correct_answer) {
+    score++; // Se sono uguali, incrementiamo il punteggio.
+    console.log(`Risposta corretta! Punteggio attuale: ${score}`);
+  } else {
+    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
+  }
+  // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
+
   // Procedi alla prossima domanda
   procediAllaProssimaDomanda();
 

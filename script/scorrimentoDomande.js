@@ -34,10 +34,20 @@ const procediAllaProssimaDomanda = () => {
     aggiornaContatore(); // Aggiorna il contatore (es. "3 / 10")
     startTimer(); // Fa ripartire il timer da 60 secondi
   } else {
-    // Se il quiz è finito, va alla pagina dei risultati
+    // --- SALVATAGGIO DATI E REINDIRIZZAMENTO ---
+    // Se il quiz è finito (non ci sono più domande nell'array),
+    // dobbiamo salvare i dati necessari per la pagina dei risultati.
+
+    // Usiamo localStorage, una memoria del browser che persiste anche dopo il cambio di pagina.
+    // Salviamo lo 'score' finale calcolato in 'creazioneDomanda.js'.
     localStorage.setItem("score", score);
+    // Salviamo anche il numero totale di domande per poter calcolare le percentuali.
     localStorage.setItem("quiz", questions.length);
-    console.log("Quiz terminato! Tutte le 10 domande completate.");
+
+    // Reindirizza alla pagina dei risultati
+    console.log(
+      `Quiz terminato! Punteggio finale: ${score}/${questions.length}`
+    );
     window.location.href = "results.html";
   }
 };

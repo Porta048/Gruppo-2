@@ -1,0 +1,155 @@
+/**
+ * FOGLIO DI STILE - PAGINA DEI RISULTATI (results.html)
+ * Layout principale basato su Flexbox.
+ */
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  text-align: center;
+  color: white;
+  background-image: url(../image/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column; /* Organizza i figli (header, main, footer) in colonna */
+}
+
+/**
+ * HEADER E FOOTER
+ * Si espandono o restringono per lasciare lo spazio centrale al main.
+ */
+header,
+footer {
+  flex-shrink: 0;
+}
+
+/**
+ * MAIN
+ * Usa Flexbox per organizzare e centrare il contenuto.
+ * Si espande per occupare tutto lo spazio verticale disponibile.
+ */
+main {
+  flex-grow: 1; /* Occupa tutto lo spazio rimanente */
+  display: flex;
+  flex-direction: column; /* Allinea titolo, risultati e bottone in colonna */
+  align-items: center; /* Centra orizzontalmente */
+  justify-content: center; /* Centra verticalmente */
+  position: relative; /* Per posizionare il bottone in modo assoluto rispetto al main */
+  padding: 2rem;
+}
+
+/* Contenitore per la riga dei risultati (Correct, Ciambella, Wrong) */
+.results-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  margin: 2rem 0; /* Spazio sopra e sotto */
+}
+
+/* Stili per il titolo "Results" */
+#title h1 {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+#title h2 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+/* Stili per le colonne "Correct" e "Wrong" */
+.correct-column,
+.wrong-column {
+  flex-basis: 200px; /* Base di partenza per la larghezza */
+  flex-shrink: 0; /* Non si restringe */
+}
+
+.correct-column h2,
+.wrong-column h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.correct-column p,
+.wrong-column p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/**
+ * IL CONTENITORE DELLA CIAMBELLA
+ * Diamo una dimensione definita per visualizzare il canvas.
+ */
+.circle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0; /* Non si restringe */
+}
+
+.doughnut {
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * TESTO AL CENTRO DELLA CIAMBELLA
+ * Posizionato in modo assoluto rispetto al suo contenitore '.circle'.
+ */
+#exam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+#exam h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+#exam h2 span {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+#exam p {
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+/* Stile per il pulsante "RATE US" */
+button {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Non si restringe */
+}
+
+button:hover {
+  background: white;
+  color: #0b0c3a;
+}
+
+button a {
+  text-decoration: none;
+  color: inherit;
+}

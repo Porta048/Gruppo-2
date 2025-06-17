@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const score = parseInt(localStorage.getItem("score"), 10);
+  const score = parseInt(localStorage.getItem("score"), 10) || 0;
   // recupero lo score con localStorage.getItem e lo pongo in base
   // decimale mettendo il 10 alla fine
-  const total = parseInt(localStorage.getItem("quiz"), 10);
+  const total = parseInt(localStorage.getItem("quiz"), 10) || 1;
   // recupero il totale con localStorage.getItem e lo pongo in base
   // decimale mettendo il 10 alla fine
+  const wrong = total - score;
+  // il valore dele domande errate saranno il nostro totale
   const correctPercentage = ((score / total) * 100).toFixed(1);
   // la nostra percentuale di risposte corrette sarà lo score
   // sul totale per 100, aggiungo il metodo toFixed(1) per arrotondare
   // ad una cifra decimale
-  const wrong = total - score;
-  // il valore dele domande errate saranno il nostro totale
   const wrongPercentage = ((wrong / total) * 100).toFixed(1);
   // la nostra percentuale di risposte scorrette sarà wrong,
   // dichiarato prima,
@@ -33,29 +33,55 @@ document.addEventListener("DOMContentLoaded", () => {
   // targhetto p
   wrongValue.innerText = `${wrong}/${total} questions`;
 
+  // --- Logica per il messaggio di superamento/fallimento esame ---
   const examState = document.getElementById("exam");
-  // targhetto il div dove ci andrà la frase del risultato
   if (correctPercentage >= 60) {
-    // se la percentuale di risposte corrette è maggiore di 60
-    // creo un h2 e un p e gli do il testo con innerHTML
-    const examPassed = document.createElement("h2");
-    examPassed.innerHTML =
-      "Congratulations! <span> You passed the exam. </span>";
-    const pExam = document.createElement("p");
-    pExam.innerText =
-      "We'll send you the certificate in few minutes. Check your email (including promotions / spam folder";
-    examState.appendChild(examPassed);
-    // appendo l'h2 al div
-    examPassed.appendChild(pExam);
-    // appendo il p all'h2
+    examState.innerHTML = `
+        <h2>Congratulations! <br> <span>You passed the exam.</span></h2>
+        <p>We'll send you the certificate in few minutes. Check your email (including promotions / spam folder)</p>
+      `;
   } else {
-    const examNotPassed = document.createElement("h2");
-    examNotPassed.innerHTML = "Unfortunately, <span> you did not pass.</span>";
-    const pExamNotPassed = document.createElement("p");
-    pExamNotPassed.innerText = "Try again to improve your score!";
-    examState.appendChild(examNotPassed);
-    // appendo l'h2 al div
-    examNotPassed.appendChild(pExamNotPassed);
-    // appendo il p all'h2
+    examState.innerHTML = `
+        <h2>Unfortunately, <br> <span>you did not pass.</span></h2>
+        <p>Try again to improve your score!</p>
+      `;
+  }
+  // --- LOGICA DELLA CIAMBELLA (CHART.JS) ---
+
+  // 1. Dati per il grafico (risposte sbagliate e giuste)
+  const chartData = {
+    labels: ["Wrong", "Correct"],
+    datasets: [
+      {
+        data: [wrong, score], // Dati dinamici
+        backgroundColor: ["#D20094", "#00FFFF"], // Colori per sbagliate e giuste
+        borderWidth: 0, // Nessun bordo per un look più pulito
+        hoverOffset: 20, // Effetto al passaggio del mouse
+      },
+    ],
+  };
+
+  // 2. Configurazione del grafico
+  const chartConfig = {
+    type: "doughnut", // Tipo di grafico
+    data: chartData,
+    options: {
+      cutout: "70%", // Spessore della ciambella
+      plugins: {
+        legend: {
+          display: false, // Nasconde la legenda (etichette "Wrong", "Correct")
+        },
+        tooltip: {
+          enabled: true, // Mostra i dettagli al passaggio del mouse
+        },
+      },
+    },
+  };
+
+  // 3. Creazione del grafico
+  // Prende l'elemento <canvas> dall'HTML e ci disegna sopra il grafico
+  const doughnutCanvas = document.querySelector(".doughnut");
+  if (doughnutCanvas) {
+    new Chart(doughnutCanvas, chartConfig);
   }
 });
