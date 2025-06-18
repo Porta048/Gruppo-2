@@ -122,7 +122,7 @@ li strong {
 }
 
 /* Stili per la checkbox personalizzata */
-/* #checkbox {
+#checkbox {
   appearance: none;
   width: 18px;
   height: 18px;
@@ -131,13 +131,8 @@ li strong {
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
-} */
-#checkbox {
-  appearance: none;
-  transform: scale(2);
-  margin-right: 1.5em;
-  background-color: red;
 }
+
 #checkbox:checked {
   border-color: white;
 }
