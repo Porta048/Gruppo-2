@@ -223,6 +223,28 @@ main {
 }
 
 /* 
+  STILI PER L'IMMAGINE DEL POKEMON
+*/
+#pokemon-image-container {
+  margin-top: 1.5em;
+  height: 250px; /* Altezza fissa per il contenitore */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-image {
+  max-height: 100%;
+  filter: brightness(0); /* Effetto silhouette */
+  transition: filter 0.5s ease-in-out;
+}
+
+/* Al passaggio del mouse, l'immagine si rivela */
+.pokemon-image:hover {
+  filter: none;
+}
+
+/* 
   ===================================
   CLASSI UTILITY (mantenute per compatibilità)
   ===================================
@@ -242,31 +264,3 @@ main {
 .button-more-proceed {
   /* Stili da definire se necessario */
 }
-
-/* 
-  =================================
-  ADATTAMENTO PER MONITOR GRANDI
-  =================================
-  Questa regola si attiva solo su schermi più larghi di 1600px
-  per migliorare la leggibilità e l'aspetto del quiz.
-*/
-@media (min-width: 1600px) {
-  html {
-    font-size: 18px; /* Aumenta la dimensione base del testo */
-  }
-
-  main {
-    max-width: 800px; /* Allarga l'area del quiz */
-  }
-
-  #logo img {
-    width: 200px; /* Ingrandisce leggermente il logo */
-  }
-
-  #timer-circle,
-  #timer-circle canvas {
-    width: 160px !important; /* Ingrandisce il timer */
-    height: 160px !important;
-  }
-}
-
