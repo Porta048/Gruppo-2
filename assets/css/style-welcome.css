@@ -19,7 +19,7 @@ body {
 }
 #logo {
   /* Posiziona il logo in alto a sinistra */
-  margin: 4rem 0rem 2rem 12rem;
+  margin: 4rem 0rem 6rem 12rem;
 }
 
 #logo img {
@@ -124,19 +124,24 @@ li strong {
 /* Stili per la checkbox personalizzata */
 #checkbox {
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  width: 20px;
+  height: 19px;
+  border: 2.5px solid rgba(255, 255, 255, 0.8);
   background: transparent;
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
+  margin-right: 0.8rem;
 }
 
 #checkbox:checked {
   border-color: white;
 }
-
+#checkbox-conteiner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 /* Simbolo di spunta (✓) quando la checkbox è selezionata */
 #checkbox:checked::after {
   content: '✓';
@@ -171,13 +176,14 @@ button {
   letter-spacing: 1px;
   cursor: pointer;
   align-self: flex-start;
-
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.5),
     /* Glow interno */ 0 0 30px rgba(0, 255, 255, 0.3),
     /* Glow medio */ 0 0 45px rgba(0, 255, 255, 0.1); /* Glow esterno */
 
   transition: all 0.3s ease;
   text-transform: uppercase;
+  display: flex;
+  align-self: baseline;
 }
 
 /* Aumenta l'effetto glow al passaggio del mouse */
@@ -258,6 +264,7 @@ button:disabled {
   #logo {
     left: 6rem;
     top: 5rem;
+    margin-bottom: 4rem;
   }
 
   #logo img {
