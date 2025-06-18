@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Selezione Difficoltà</title>
-</head>
-<body>
-    <h1>Difficoltà:</h1>
-    
-    <div>
-        <button id="facile">Facile</button>
-    </div>
-    
-    <div>
-        <button id="media">Media</button>
-    </div>
-    
-    <div>
-        <button id="difficile">Difficile (per Stefano)</button>
-    </div>
+    <link rel="stylesheet" href="../assets/css/reset.css" />
+    <link rel="stylesheet" href="../assets/css/difficulty.css" />
+  </head>
 
-    <div>
-        <button id="avanti" style="display: none; margin-top: 20px;">AVANTI</button>
-    </div>
+  <body>
+    <header>
+      <div id="logo">
+        <img src="../assets/image/epicode_logo.png" alt="logo-epicode" />
+      </div>
+    </header>
+    <main>
+      <h1>Difficulty:</h1>
+      <div id="divconteiner">
+        <div>
+          <button class="answer-option" id="facile">Facile</button>
+        </div>
 
+        <div>
+          <button class="answer-option" id="media">Media</button>
+        </div>
+
+        <div>
+          <button class="answer-option" id="difficile">Difficile</button>
+        </div>
+      </div>
+      <div id="endbutton">
+        <button id="avanti" style="display: none; margin-top: 20px">
+          AVANTI
+        </button>
+      </div>
+    </main>
     <script>
-        const difficoltaButtons = document.querySelectorAll('button[id^="facile"], button[id^="media"], button[id^="difficile"]');
-        const avantiButton = document.getElementById('avanti');
-        let difficoltaSelezionata = '';
+      const difficoltaButtons = document.querySelectorAll(
+        'button[id^="facile"], button[id^="media"], button[id^="difficile"]'
+      )
+      const avantiButton = document.getElementById('avanti')
+      let difficoltaSelezionata = ''
 
-        difficoltaButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                // Salva la difficoltà scelta
-                difficoltaSelezionata = event.target.id;
-                localStorage.setItem('difficolta', difficoltaSelezionata);
-                
-                // Mostra il pulsante AVANTI
-                avantiButton.style.display = 'block';
+      difficoltaButtons.forEach((button) => {
+        button.addEventListener('click', (event) => {
+          // Salva la difficoltà scelta
+          difficoltaSelezionata = event.target.id
+          localStorage.setItem('difficolta', difficoltaSelezionata)
 
-                // Opzionale: evidenzia il pulsante selezionato
-                difficoltaButtons.forEach(btn => btn.style.border = '1px solid black');
-                event.target.style.border = '2px solid blue';
-            });
-        });
+          // Mostra il pulsante AVANTI
+          avantiButton.style.display = 'block'
 
-        avantiButton.addEventListener('click', () => {
-            // Reindirizza alla pagina del benchmark
-            window.location.href = 'benchmark.html';
-        });
+          // Opzionale: evidenzia il pulsante selezionato
+          difficoltaButtons.forEach(
+            (btn) => (btn.style.border = '1px solid black')
+          )
+          event.target.style.border = '2px solid blue'
+        })
+      })
+
+      avantiButton.addEventListener('click', () => {
+        // Reindirizza alla pagina del benchmark
+        window.location.href = 'benchmark.html'
+      })
     </script>
-</body>
-</html> 
+  </body>
+</html>
