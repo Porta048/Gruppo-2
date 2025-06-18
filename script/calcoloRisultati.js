@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>We'll send you the certificate <br> in few minutes. <br> Check your email (including <br> promotions / spam folder)</p>
       `;
 
-    // E ora, il tocco finale per chi se l'è meritato: una pioggia di coriandoli!
+  
     // Usiamo la libreria canvas-confetti per festeggiare il superamento dell'esame.
     const duration = 5 * 1000; // L'effetto durerà 5 secondi
     const animationEnd = Date.now() + duration;
@@ -91,20 +91,20 @@ document.addEventListener("DOMContentLoaded", () => {
     type: "doughnut", // Tipo di grafico: ciambella
     data: chartData,
     options: {
-      animation: false, // Abbiamo tolto le animazioni come richiesto
+      animation: false, //  tolto le animazioni come richiesto
       cutout: "70%", // Questo definisce lo spessore della ciambella
       plugins: {
         legend: {
-          display: false, // Non mostriamo la legenda standard
+          display: false, // Non mostra la legenda standard
         },
         tooltip: {
-          enabled: true, // Ma mostriamo i dettagli al passaggio del mouse
+          enabled: true, //  mostra i dettagli al passaggio del mouse
         },
       },
     },
   };
 
-  // Infine, prendiamo l'elemento <canvas> dall'HTML e ci disegniamo sopra il grafico.
+  //  prendiamo l'elemento <canvas> dall'HTML e ci disegniamo sopra il grafico.
   const doughnutCanvas = document.querySelector(".doughnut");
   if (doughnutCanvas) {
     new Chart(doughnutCanvas, chartConfig);
