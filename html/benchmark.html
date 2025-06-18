@@ -70,6 +70,11 @@
       <div class="question-counter">
         <p>QUESTION 1 <span>/ 10</span></p>
       </div>
+
+      <!-- CONTENITORE IMMAGINE POKEMON - Viene popolato da JavaScript -->
+      <div id="pokemon-image-container">
+        <!-- L'immagine del Pokémon viene inserita qui -->
+      </div>
     </main>
 
     <!-- 
@@ -84,8 +89,26 @@
     <!-- SCRIPT DEL TIMER - Gestisce il countdown e il grafico circolare -->
     <script src="../script/timer.js"></script>
     
-    <!-- SCRIPT PER LA CREAZIONE DELLA DOMANDA - Genera dinamicamente domanda e risposte -->
-    <script src="../script/creazioneDomanda.js"></script>
+    <!-- 
+      CARICAMENTO DINAMICO DELLO SCRIPT DELLE DOMANDE
+      Questo script legge la difficoltà dal localStorage e carica il file .js corretto.
+      Usa document.write per assicurarsi che lo script sia caricato ed eseguito
+      in modo sincrono, prima degli altri script che dipendono da esso.
+    -->
+    <script>
+      const difficolta = localStorage.getItem('difficolta');
+      let scriptPath;
+      if (difficolta === 'difficile') {
+        scriptPath = '../script/domandedifficili.js';
+      } else if (difficolta === 'media') {
+        scriptPath = '../script/medium.js';
+      }
+      else {
+        // Se non è 'difficile' o 'media', carica le domande normali come default
+        scriptPath = '../script/creazioneDomanda.js';
+      }
+      document.write(`<script src="${scriptPath}"><\/script>`);
+    </script>
     
     <!-- SCRIPT PER LO SCORRIMENTO DELLE DOMANDE - Sistema intelligente a singola pagina -->
     <script src="../script/scorrimentoDomande.js"></script>
