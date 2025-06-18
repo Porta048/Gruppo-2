@@ -11,10 +11,12 @@
     <!-- FONT DI GOOGLE (Montserrat per il timer, Inter per il testo) -->
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
 
     <title>Epicode quiz</title>
 
@@ -22,6 +24,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
+    <!-- Elemento audio per il jingle "Who's That Pokémon?" -->
+    <audio
+      id="pokemon-audio"
+      src="../assets/audio/Who's That Pokèmon.mp3"
+    ></audio>
+
     <!-- 
       HEADER: Contiene logo (sinistra) e timer (destra)
       Posizionato nella parte superiore della pagina
@@ -88,7 +96,7 @@
 
     <!-- SCRIPT DEL TIMER - Gestisce il countdown e il grafico circolare -->
     <script src="../script/timer.js"></script>
-    
+
     <!-- 
       CARICAMENTO DINAMICO DELLO SCRIPT DELLE DOMANDE
       Questo script legge la difficoltà dal localStorage e carica il file .js corretto.
@@ -96,22 +104,20 @@
       in modo sincrono, prima degli altri script che dipendono da esso.
     -->
     <script>
-      const difficolta = localStorage.getItem('difficolta');
-      let scriptPath;
+      const difficolta = localStorage.getItem('difficolta')
+      let scriptPath
       if (difficolta === 'difficile') {
-        scriptPath = '../script/domandedifficili.js';
+        scriptPath = '../script/domandedifficili.js'
       } else if (difficolta === 'media') {
-        scriptPath = '../script/medium.js';
-      }
-      else {
+        scriptPath = '../script/medium.js'
+      } else {
         // Se non è 'difficile' o 'media', carica le domande normali come default
-        scriptPath = '../script/creazioneDomanda.js';
+        scriptPath = '../script/creazioneDomanda.js'
       }
-      document.write(`<script src="${scriptPath}"><\/script>`);
+      document.write(`<script src="${scriptPath}"><\/script>`)
     </script>
-    
+
     <!-- SCRIPT PER LO SCORRIMENTO DELLE DOMANDE - Sistema intelligente a singola pagina -->
     <script src="../script/scorrimentoDomande.js"></script>
   </body>
 </html>
-
