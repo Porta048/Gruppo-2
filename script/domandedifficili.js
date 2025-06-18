@@ -120,6 +120,9 @@ let userAnswers = [];
 let currentQuestionIndex = 0;
 // `score`: Il punteggio del giocatore. Parte da 0 e viene incrementato per ogni risposta corretta.
 let score = 0;
+// `firstInteractionDone`: una variabile "flag" per sapere se l'utente ha già interagito.
+// Ci serve per rispettare le policy dei browser sull'autoplay dell'audio.
+let firstInteractionDone = false;
 
 /**
  * FUNZIONE: selezionaRisposta
@@ -131,6 +134,16 @@ let score = 0;
  * @param {HTMLElement} selectedDiv - L'elemento div cliccato dall'utente.
  */
 const selezionaRisposta = (answer, selectedDiv) => {
+  // Se questa è la prima interazione dell'utente con la pagina,
+  // registriamo il gesto e facciamo partire l'audio per la prima domanda.
+  if (!firstInteractionDone) {
+    firstInteractionDone = true;
+    const audioElement = document.getElementById("pokemon-audio");
+    if (audioElement && audioElement.paused) {
+      audioElement.play();
+    }
+  }
+
   // Rimuove la classe 'selected' da tutte le opzioni per "deselezionare" le precedenti.
   document.querySelectorAll(".answer-option").forEach((div) => {
     div.classList.remove("selected");
@@ -200,6 +213,14 @@ const imageContainer = document.getElementById("pokemon-image-container");
  * @param {number} index - L'indice della domanda da creare, preso da `currentQuestionIndex`.
  */
 const creaDomanda = (index) => {
+  // Avvia l'audio "Who's That Pokémon?", ma solo se l'utente ha già interagito,
+  // altrimenti il browser bloccherebbe la riproduzione automatica.
+  const audioElement = document.getElementById("pokemon-audio");
+  if (audioElement && firstInteractionDone) {
+    audioElement.currentTime = 0; // Riavvolge l'audio all'inizio
+    audioElement.play();
+  }
+
   const domanda = questions[index];
   
   // 1. Aggiorna il testo della domanda e l'immagine.
