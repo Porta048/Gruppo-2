@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selezione Difficoltà</title>
+</head>
+<body>
+    <h1>Difficoltà:</h1>
+    
+    <div>
+        <button id="facile">Facile</button>
+    </div>
+    
+    <div>
+        <button id="media">Media</button>
+    </div>
+    
+    <div>
+        <button id="difficile">Difficile (per Stefano)</button>
+    </div>
+
+    <div>
+        <button id="avanti" style="display: none; margin-top: 20px;">AVANTI</button>
+    </div>
+
+    <script>
+        const difficoltaButtons = document.querySelectorAll('button[id^="facile"], button[id^="media"], button[id^="difficile"]');
+        const avantiButton = document.getElementById('avanti');
+        let difficoltaSelezionata = '';
+
+        difficoltaButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                // Salva la difficoltà scelta
+                difficoltaSelezionata = event.target.id;
+                localStorage.setItem('difficolta', difficoltaSelezionata);
+                
+                // Mostra il pulsante AVANTI
+                avantiButton.style.display = 'block';
+
+                // Opzionale: evidenzia il pulsante selezionato
+                difficoltaButtons.forEach(btn => btn.style.border = '1px solid black');
+                event.target.style.border = '2px solid blue';
+            });
+        });
+
+        avantiButton.addEventListener('click', () => {
+            // Reindirizza alla pagina del benchmark
+            window.location.href = 'benchmark.html';
+        });
+    </script>
+</body>
+</html> 
