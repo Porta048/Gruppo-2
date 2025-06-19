@@ -13,7 +13,7 @@ body {
   background-image: url(../image/bg.jpg);
   background-size: cover;
   background-position: center;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   color: #fff;
   margin: 0;
   padding: 0;
@@ -72,7 +72,7 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* NUMERO DEL TIMER (es. "50") */
@@ -127,7 +127,7 @@ main {
 
 /* TESTO DELLA DOMANDA */
 #h2-domanda h2 {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 2.2em;
   font-weight: 700;
   margin-bottom: 2em;
@@ -173,7 +173,7 @@ main {
 }
 
 /* Nasconde i pallini dei radio button */
-.answer-option input[type="radio"] {
+.answer-option input[type='radio'] {
   display: none;
 }
 
@@ -188,7 +188,7 @@ main {
   border: 2px solid #d20094;
   padding: 1em 2.5em;
   border-radius: 25px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1em;
   font-weight: bold;
   letter-spacing: 1px;
@@ -210,7 +210,7 @@ main {
   CONTATORE DOMANDE (es. "QUESTION 1 / 10")
 */
 .question-counter {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.2em;
   letter-spacing: 2px;
   margin-top: 1em;
@@ -263,4 +263,21 @@ main {
 /* Classe per bottoni (usata in altre pagine) */
 .button-more-proceed {
   /* Stili da definire se necessario */
+}
+.answer-option.selected.correct {
+  background-color: green;
+}
+.answer-option.selected.wrong {
+  background-color: red;
+}
+/* Stile per la risposta corretta (verde) - SOSTITUISCE le regole errate in fondo /
+.answer-option.correct {
+  background-color: #2e7d32 !important;
+  border-color: #4caf50 !important;
+}
+
+/ Stile per la risposta sbagliata (rosso) - SOSTITUISCE le regole errate in fondo */
+.answer-option.wrong {
+  background-color: #c62828 !important;
+  border-color: #f44336 !important;
 }
