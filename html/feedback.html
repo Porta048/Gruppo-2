@@ -60,7 +60,7 @@
 
         <!-- Contenitore per l'immagine di ringraziamento, nascosto di default -->
         <div id="thank-you-image-container" style="display: none; text-align: center; margin-top: 20px;">
-          <img src="../assets/image/pikachu saluto.png" alt="Grazie!" style="width: 80px;" />
+                    <img id="thank-you-gif" src="../assets/image/pikachu_saluto.png" alt="Grazie!" style="width: 80px;" />
         </div>
       </div>
     </main>
@@ -126,7 +126,11 @@
 
             // Se la valutazione è maggiore di 6 (indice 6 o superiore),
             // mostriamo l'immagine di ringraziamento.
+                        // Se la valutazione è maggiore di 6 (indice 6 o superiore),
+            // mostriamo l'immagine di ringraziamento, aggiungendo un parametro univoco per evitare problemi di cache.
             if (clickedStarStep >= 6) {
+              const gif = document.getElementById('thank-you-gif');
+              gif.src = `../assets/image/pikachu_saluto.png?t=${Date.now()}`;
               thankYouImageContainer.style.display = 'block';
             } else {
               // Altrimenti, la nascondiamo.
