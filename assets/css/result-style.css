@@ -192,3 +192,34 @@ button a {
   text-decoration: none;
   color: inherit;
 }
+
+
+
+.results-container .circle {
+  position: relative;
+}
+
+/* Stile per il contenitore dell'immagine di Pikachu */
+#pikachu-sorpreso-container {
+  margin: 30px auto; /* Aggiunge spazio sopra e sotto */
+  width: 80%;
+  max-width: 80px; /* Ridotta ulteriormente la larghezza massima */
+}
+
+#pikachu-sorpreso-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px; /* Angoli smussati */
+}
+
+/* Stile per il contenitore della GIF di festeggiamento */
+#celebration-gif-container {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 250px;
+}
+
+#celebration-gif-container img {
+  width: 100%;
+  height: auto;
+}
