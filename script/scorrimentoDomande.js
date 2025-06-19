@@ -65,8 +65,13 @@ const prossimaAnswerOption = () => {
       }
     })
   }
+
+  // Cerca e rivela l'immagine del Pokémon, solo se esiste.
   const img = document.querySelector('#pokemon-image-container img')
-  img.classList.add('pokemon-image-reveal')
+  if (img) {
+    img.classList.add('pokemon-image-reveal')
+  }
+
   // Attendi 1.5 secondi per mostrare il feedback, poi procedi
   setTimeout(() => {
     procediAllaProssimaDomanda()

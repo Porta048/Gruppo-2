@@ -126,6 +126,15 @@ const selezionaRisposta = (answer, selectedDiv) => {
   }
 };
 
+/*
+ * QUESTA FUNZIONE VIENE COMMENTATA E LASCIATA VUOTA INTENZIONALMENTE
+ * per evitare conflitti con la funzione centralizzata in scorrimentoDomande.js
+ *
+const prossimaAnswerOption = () => {
+  // Il codice qui è stato rimosso.
+};
+*/
+
 // Seleziona e prepara i contenitori
 const divH2 = document.getElementById("h2-domanda");
 const h2 = document.createElement("h2");
