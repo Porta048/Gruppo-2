@@ -128,59 +128,6 @@ const selezionaRisposta = (answer, selectedDiv) => {
   }
 };
 
-// Funzione per gestire il click del pulsante "Avanti"
-const prossimaAnswerOption = () => {
-  // --- LOGICA DI CONTROLLO PUNTEGGIO ---
-  // Prima di passare alla domanda successiva, controlliamo se la risposta data è corretta.
-
-  const domandaCorrente = questions[currentQuestionIndex]; // L'oggetto della domanda attuale
-  const rispostaUtente = userAnswers[currentQuestionIndex]; // La stringa della risposta scelta dall'utente
-
-  // Confrontiamo la risposta dell'utente con la risposta corretta per la domanda attuale.
-
-  const feedback = document.querySelector(".answer-option.selected");
-
-  // Aggiunto controllo per assicurarsi che 'feedback' e 'rispostaUtente' esistano
-  if (!feedback || !rispostaUtente) {
-    // Se non c'è risposta (es. tempo scaduto), mostra solo quella corretta e vai avanti
-    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
-    tutteLeOpzioni.forEach((opzione) => {
-      const radioValue = opzione.querySelector('input[type="radio"]').value;
-      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
-        opzione.classList.add("correct");
-      }
-    });
-  } else if (rispostaUtente.trim() === domandaCorrente.correct_answer.trim()) {
-    feedback.classList.add("correct");
-    score++;
-    console.log(`Risposta corretta! Punteggio attuale: ${score}`);
-  } else {
-    feedback.classList.add("wrong");
-    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
-
-    // Cerca e colora la risposta corretta di verde
-    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
-    tutteLeOpzioni.forEach((opzione) => {
-      const radioValue = opzione.querySelector('input[type="radio"]').value;
-      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
-        opzione.classList.add("correct");
-      }
-    });
-  }
-
-  // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
-
-  // Procedi alla prossima domanda dopo un breve ritardo per mostrare il feedback
-  setTimeout(() => {
-    procediAllaProssimaDomanda();
-
-    const nextButton = document.getElementById("next-button");
-    if (nextButton) {
-      nextButton.style.display = "none";
-    }
-  }, 1500);
-};
-
 // Seleziona e prepara i contenitori
 const divH2 = document.getElementById("h2-domanda");
 const h2 = document.createElement("h2");
