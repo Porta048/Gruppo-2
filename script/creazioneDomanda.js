@@ -120,11 +120,11 @@ const selezionaRisposta = (answer, selectedDiv) => {
   selectedDiv.querySelector('input[type="radio"]').checked = true;
 
   userAnswers[currentQuestionIndex] = answer;
-  
+
   // Mostra il pulsante "Avanti" quando viene selezionata una risposta
-  const nextButton = document.getElementById('next-button');
+  const nextButton = document.getElementById("next-button");
   if (nextButton) {
-    nextButton.style.display = 'block';
+    nextButton.style.display = "block";
   }
 };
 
@@ -137,22 +137,43 @@ const prossimaAnswerOption = () => {
   const rispostaUtente = userAnswers[currentQuestionIndex]; // La stringa della risposta scelta dall'utente
 
   // Confrontiamo la risposta dell'utente con la risposta corretta per la domanda attuale.
+
+  const feedback = document.querySelector(".answer-option.selected");
+
   if (rispostaUtente === domandaCorrente.correct_answer) {
+    feedback.classList.add("correct");
     score++; // Se sono uguali, incrementiamo il punteggio.
     console.log(`Risposta corretta! Punteggio attuale: ${score}`);
   } else {
+    // creare nodelist di tutti i div che contengono le opzioni di risposta
+    const labels = document.getElementsByTagName("label");
+    console.log(labels);
+
+    // labels.forEach((div) => {
+    //   // const label = div.getElementsByTagName("label");
+
+    //   if (label.textContent === domandaCorrente.correct_answer) {
+    //     div.classList.add("correct");
+    //   }
+    // });
+    // per ogununa di loro devo vedere se il suo contenuto corrisponde a .correct_answer
+    // assegno al div appena trovato assegno la classe correct
+
+    feedback.classList.add("wrong");
     console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
   }
   // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
 
   // Procedi alla prossima domanda
-  procediAllaProssimaDomanda();
-  
-  // Nascondi il pulsante per la prossima domanda
-  const nextButton = document.getElementById('next-button');
-  if (nextButton) {
-    nextButton.style.display = 'none';
-  }
+  setTimeout(() => {
+    procediAllaProssimaDomanda();
+
+    // Nascondi il pulsante per la prossima domanda
+    const nextButton = document.getElementById("next-button");
+    if (nextButton) {
+      nextButton.style.display = "none";
+    }
+  }, 20000);
 };
 
 // Seleziona e prepara i contenitori
@@ -198,11 +219,11 @@ const creaDomanda = (index) => {
 
     risposteDiv.appendChild(singolaRispostaDiv);
   });
-  
+
   // Nascondi il pulsante "Avanti" all'inizio di ogni nuova domanda
-  const nextButton = document.getElementById('next-button');
+  const nextButton = document.getElementById("next-button");
   if (nextButton) {
-    nextButton.style.display = 'none';
+    nextButton.style.display = "none";
   }
 };
 
@@ -210,6 +231,6 @@ const creaDomanda = (index) => {
 creaDomanda(currentQuestionIndex);
 
 // Aggiorna il contatore per la prima domanda (se la funzione è disponibile)
-if (typeof aggiornaContatore === 'function') {
+if (typeof aggiornaContatore === "function") {
   aggiornaContatore();
 }

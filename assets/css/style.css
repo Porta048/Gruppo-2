@@ -264,3 +264,10 @@ main {
 .button-more-proceed {
   /* Stili da definire se necessario */
 }
+
+.answer-option.selected.correct {
+  background-color: green;
+}
+.answer-option.selected.wrong {
+  background-color: rgb(255, 0, 0);
+}
