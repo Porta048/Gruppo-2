@@ -64,12 +64,47 @@ document.addEventListener("DOMContentLoaded", () => {
       confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
       confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
     }, 250);
+
+    // CONTROLLO PER LA GIF DI FESTEGGIAMENTO
+    // Se il quiz era 'difficile', mostra la GIF.
+    const difficolta = localStorage.getItem("difficolta");
+    if (difficolta === "difficile") {
+      const gifContainer = document.getElementById(
+        "celebration-gif-container"
+      );
+      if (gifContainer) {
+          // Aggiungo un timestamp all'URL della GIF per evitare che il browser
+          // utilizzi una versione vecchia salvata in cache.
+          const timestamp = new Date().getTime();
+          const gifImage = gifContainer.querySelector('img');
+          gifImage.src = `../assets/image/pikachu-happy.gif?t=${timestamp}`;
+
+          // Imposto la larghezza della GIF direttamente da qui
+          // per assicurarmi che la dimensione sia sempre quella corretta.
+          gifImage.style.width = '100px';
+
+          // Rendo visibile il contenitore della GIF.
+          gifContainer.style.display = "block";
+        }
+    }
   } else {
     // Altrimenti, mostriamo un messaggio di incoraggiamento.
     examState.innerHTML = `
         <h2>Unfortunately, <br> <span>you did not pass.</span></h2>
         <p>Try again to improve <br> your score!</p>
       `;
+
+    // CONTROLLO PER PIKACHU SORPRESO
+    // Leggiamo la difficoltà e, se è 'difficile', mostriamo l'immagine.
+    const difficolta = localStorage.getItem("difficolta");
+    if (difficolta === "difficile") {
+      const pikachuContainer = document.getElementById(
+        "pikachu-sorpreso-container"
+      );
+      if (pikachuContainer) {
+        pikachuContainer.style.display = "block";
+      }
+    }
   }
 
   // --- LOGICA DELLA CIAMBELLA (CHART.JS) ---
