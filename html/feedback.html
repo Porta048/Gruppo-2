@@ -57,6 +57,11 @@
 
           <button id="goToEpicode">MORE INFO</button>
         </form>
+
+        <!-- Contenitore per l'immagine di ringraziamento, nascosto di default -->
+        <div id="thank-you-image-container" style="display: none; text-align: center; margin-top: 20px;">
+          <img src="../assets/image/pikachu saluto.png" alt="Grazie!" style="width: 80px;" />
+        </div>
       </div>
     </main>
     <script>
@@ -93,6 +98,9 @@
         // Eseguiamo la funzione una sola volta, appena la pagina è pronta.
         setDefaultStars();
 
+        // Troviamo il contenitore dell'immagine di ringraziamento.
+        const thankYouImageContainer = document.getElementById('thank-you-image-container');
+
         // --- PARTE 2: GESTIONE DEL CLICK SULLE STELLE ---
         // Questa parte rende le stelle interattive.
 
@@ -115,6 +123,15 @@
                 s.classList.remove('active');
               }
             });
+
+            // Se la valutazione è maggiore di 6 (indice 6 o superiore),
+            // mostriamo l'immagine di ringraziamento.
+            if (clickedStarStep >= 6) {
+              thankYouImageContainer.style.display = 'block';
+            } else {
+              // Altrimenti, la nascondiamo.
+              thankYouImageContainer.style.display = 'none';
+            }
           });
         });
 
