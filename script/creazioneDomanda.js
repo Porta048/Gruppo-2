@@ -140,40 +140,45 @@ const prossimaAnswerOption = () => {
 
   const feedback = document.querySelector(".answer-option.selected");
 
-  if (rispostaUtente === domandaCorrente.correct_answer) {
+  // Aggiunto controllo per assicurarsi che 'feedback' e 'rispostaUtente' esistano
+  if (!feedback || !rispostaUtente) {
+    // Se non c'è risposta (es. tempo scaduto), mostra solo quella corretta e vai avanti
+    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
+    tutteLeOpzioni.forEach((opzione) => {
+      const radioValue = opzione.querySelector('input[type="radio"]').value;
+      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
+        opzione.classList.add("correct");
+      }
+    });
+  } else if (rispostaUtente.trim() === domandaCorrente.correct_answer.trim()) {
     feedback.classList.add("correct");
-    score++; // Se sono uguali, incrementiamo il punteggio.
+    score++;
     console.log(`Risposta corretta! Punteggio attuale: ${score}`);
   } else {
-    // creare nodelist di tutti i div che contengono le opzioni di risposta
-    const labels = document.getElementsByTagName("label");
-    console.log(labels);
-
-    // labels.forEach((div) => {
-    //   // const label = div.getElementsByTagName("label");
-
-    //   if (label.textContent === domandaCorrente.correct_answer) {
-    //     div.classList.add("correct");
-    //   }
-    // });
-    // per ogununa di loro devo vedere se il suo contenuto corrisponde a .correct_answer
-    // assegno al div appena trovato assegno la classe correct
-
     feedback.classList.add("wrong");
     console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
+
+    // Cerca e colora la risposta corretta di verde
+    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
+    tutteLeOpzioni.forEach((opzione) => {
+      const radioValue = opzione.querySelector('input[type="radio"]').value;
+      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
+        opzione.classList.add("correct");
+      }
+    });
   }
+
   // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
 
-  // Procedi alla prossima domanda
+  // Procedi alla prossima domanda dopo un breve ritardo per mostrare il feedback
   setTimeout(() => {
     procediAllaProssimaDomanda();
 
-    // Nascondi il pulsante per la prossima domanda
     const nextButton = document.getElementById("next-button");
     if (nextButton) {
       nextButton.style.display = "none";
     }
-  }, 20000);
+  }, 1500);
 };
 
 // Seleziona e prepara i contenitori
