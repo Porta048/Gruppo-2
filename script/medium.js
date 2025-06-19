@@ -126,33 +126,6 @@ const selezionaRisposta = (answer, selectedDiv) => {
   }
 }
 
-// Funzione per gestire il click del pulsante "Avanti"
-const prossimaAnswerOption = () => {
-  // --- LOGICA DI CONTROLLO PUNTEGGIO ---
-  // Prima di passare alla domanda successiva, controlliamo se la risposta data è corretta.
-
-  const domandaCorrente = questions[currentQuestionIndex] // L'oggetto della domanda attuale
-  const rispostaUtente = userAnswers[currentQuestionIndex] // La stringa della risposta scelta dall'utente
-
-  // Confrontiamo la risposta dell'utente con la risposta corretta per la domanda attuale.
-  if (rispostaUtente === domandaCorrente.correct_answer) {
-    score++ // Se sono uguali, incrementiamo il punteggio.
-    console.log(`Risposta corretta! Punteggio attuale: ${score}`)
-  } else {
-    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`)
-  }
-  // --- FINE LOGICA DI CONTROLLO PUNTEGGIO ---
-
-  // Procedi alla prossima domanda
-  procediAllaProssimaDomanda()
-
-  // Nascondi il pulsante per la prossima domanda
-  const nextButton = document.getElementById('next-button')
-  if (nextButton) {
-    nextButton.style.display = 'none'
-  }
-}
-
 // Seleziona e prepara i contenitori
 const divH2 = document.getElementById('h2-domanda')
 const h2 = document.createElement('h2')
