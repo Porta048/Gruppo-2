@@ -172,6 +172,18 @@ main {
   border-color: #d20094;
 }
 
+/* Stile per la risposta corretta (verde) - SOSTITUISCE le regole errate in fondo */
+.answer-option.correct {
+  background-color: #2e7d32 !important;
+  border-color: #4caf50 !important;
+}
+
+/* Stile per la risposta sbagliata (rosso) - SOSTITUISCE le regole errate in fondo */
+.answer-option.wrong {
+  background-color: #c62828 !important;
+  border-color: #f44336 !important;
+}
+
 /* Nasconde i pallini dei radio button */
 .answer-option input[type="radio"] {
   display: none;

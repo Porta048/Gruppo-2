@@ -164,35 +164,14 @@ const selezionaRisposta = (answer, selectedDiv) => {
   }
 };
 
-/**
- * FUNZIONE: prossimaAnswerOption
- * SCOPO: Viene eseguita quando si clicca su "AVANTI".
- * - Controlla se la risposta data è corretta e aggiorna lo `score`.
- * - Chiama la funzione per passare alla domanda successiva.
- * - Nasconde di nuovo il pulsante "AVANTI".
- */
+/*
+ * QUESTA FUNZIONE VIENE LASCIATA VUOTA INTENZIONALMENTE
+ * per evitare conflitti con la funzione centralizzata in scorrimentoDomande.js
+ *
 const prossimaAnswerOption = () => {
-  // --- LOGICA DI CONTROLLO PUNTEGGIO ---
-  const domandaCorrente = questions[currentQuestionIndex];
-  const rispostaUtente = userAnswers[currentQuestionIndex];
-
-  // Confronta la stringa della risposta utente con la risposta corretta.
-  if (rispostaUtente === domandaCorrente.correct_answer) {
-    score++; // Se corretto, incrementa il punteggio.
-    console.log(`Risposta corretta! Punteggio attuale: ${score}`);
-  } else {
-    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
-  }
-
-  // Passa alla domanda successiva (la funzione è definita in `scorrimentoDomande.js`).
-  procediAllaProssimaDomanda();
-
-  // Nasconde il pulsante "AVANTI" in attesa di una nuova risposta.
-  const nextButton = document.getElementById("next-button");
-  if (nextButton) {
-    nextButton.style.display = "none";
-  }
+  // Il codice qui è stato rimosso.
 };
+*/
 
 // --- PREPARAZIONE DELL'INTERFACCIA ---
 

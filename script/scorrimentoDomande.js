@@ -13,6 +13,64 @@ const aggiornaContatore = () => {
 };
 
 /**
+ * FUNZIONE CENTRALIZZATA PER GESTIRE IL PULSANTE "AVANTI"
+ * SCOPO:
+ * - Controlla la risposta data.
+ * - Mostra il feedback visivo (verde per corretto, rosso per sbagliato).
+ * - Attende un breve periodo, poi passa alla domanda successiva.
+ * Funziona per tutti i livelli di difficoltà.
+ */
+const prossimaAnswerOption = () => {
+  // Disabilita i click su tutte le opzioni per evitare input doppi
+  document.querySelectorAll(".answer-option").forEach((div) => {
+    div.style.pointerEvents = "none";
+  });
+
+  const nextButton = document.getElementById("next-button");
+  if (nextButton) {
+    nextButton.style.display = "none";
+  }
+
+  const domandaCorrente = questions[currentQuestionIndex];
+  const rispostaUtente = userAnswers[currentQuestionIndex]; // Può essere undefined se il tempo scade
+
+  const feedback = document.querySelector(".answer-option.selected");
+
+  // Aggiunto controllo per assicurarsi che 'feedback' e 'rispostaUtente' esistano
+  if (!feedback || !rispostaUtente) {
+    // Se non c'è risposta (es. tempo scaduto), mostra solo quella corretta e vai avanti
+    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
+    tutteLeOpzioni.forEach((opzione) => {
+      const radioValue = opzione.querySelector('input[type="radio"]').value;
+      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
+        opzione.classList.add("correct");
+      }
+    });
+  } else if (rispostaUtente.trim() === domandaCorrente.correct_answer.trim()) {
+    feedback.classList.add("correct");
+    score++;
+    console.log(`Risposta corretta! Punteggio attuale: ${score}`);
+  } else {
+    feedback.classList.add("wrong");
+    console.log(`Risposta sbagliata. Punteggio attuale: ${score}`);
+
+    // Cerca e colora la risposta corretta di verde
+    const tutteLeOpzioni = document.querySelectorAll(".answer-option");
+    tutteLeOpzioni.forEach((opzione) => {
+      const radioValue = opzione.querySelector('input[type="radio"]').value;
+      if (radioValue.trim() === domandaCorrente.correct_answer.trim()) {
+        opzione.classList.add("correct");
+      }
+    });
+  }
+
+  // Attendi 1.5 secondi per mostrare il feedback, poi procedi
+  setTimeout(() => {
+    procediAllaProssimaDomanda();
+  }, 1500);
+};
+
+/**
  * FUNZIONE: procediAllaProssimaDomanda
  * SCOPO: Gestisce il passaggio da una domanda all'altra.
  * - Aumenta l'indice per passare alla domanda successiva.
