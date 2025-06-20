@@ -94,12 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>Try again to improve <br> your score!</p>
       `;
 
-    // CONTROLLO PER PIKACHU SORPRESO
-    // Leggiamo la difficoltà e, se è 'difficile', mostriamo l'immagine.
+        // CONTROLLO PER PIKACHU CHE PIANGE
+    // Se l'esame non è superato e la difficoltà era 'difficile', mostra la GIF.
     const difficolta = localStorage.getItem("difficolta");
     if (difficolta === "difficile") {
       const pikachuContainer = document.getElementById(
-        "pikachu-sorpreso-container"
+        "pikachu-crying-container"
       );
       if (pikachuContainer) {
         pikachuContainer.style.display = "block";
